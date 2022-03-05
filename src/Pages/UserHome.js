@@ -1,13 +1,13 @@
-import React from 'react'
-import Layout from '../Components/Layout/Layout'
-import UserManagement from '../Components/UserManagment/UserManagement'
+import React from "react";
+import { Layout } from "../Components";
+import { UserManagement } from "../Components";
 
-const  UserHome=()=> {
-  return (
-    <Layout>
-      <UserManagement/>
-    </Layout>
-  )
-}
+const UserHome = () => {
+     return (
+          <Layout>
+               <UserManagement />
+          </Layout>
+     );
+};
 
-export default UserHome
+export default UserHome;

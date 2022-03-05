@@ -19,21 +19,15 @@ import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
 import { addProduct } from "../../utlis/Constants";
-import ShowSnackbar from "../utlis/ShowSnackbar";
-import { setSnackBarStatus } from "../../Redux/snackbar/snackBarStatus";
-import { setSnackBarMessage } from "../../Redux/snackbar/snackBarMessage";
-import { useDispatch ,useSelector} from "react-redux";
+
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
 const AddProductButton = () => {
-    const msg = useSelector((state)=>state.snackBarMessage.value)
     
 
-
-    const dispatch = useDispatch();
     const [open, setOpen] =useState(false);
 
     const handleClickOpen = () => {
@@ -74,16 +68,10 @@ const AddProductButton = () => {
             .then( (response) => {
 
                 
-                dispatch(setSnackBarMessage({snackBarMessage:response.data.message}))
-                console.log(msg);
-                
-                dispatch(setSnackBarStatus({snackBarStatus:true}))
-             
-                setTimeout(() => {
-                    dispatch(setSnackBarStatus({snackBarStatus:false}))
-             
+               
+
                     setOpen(false);
-                }, 2000);
+               
                 
             })
             .catch((err) => {
@@ -310,7 +298,7 @@ const AddProductButton = () => {
                             <DialogContentText color="error">{errors.Profit?.message}</DialogContentText>
                         </Grid>
                     </Grid>
-                    <ShowSnackbar/>
+                    
                 </Container>
             </Dialog>
         </div>
