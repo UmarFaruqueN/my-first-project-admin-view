@@ -42,11 +42,12 @@ const LoginForm = () => {
                .then((response) => {
                     console.log(response);
                     Swal.fire({
-                         position: "top-end",
+                         position: "bottom-end",
                          icon: "success",
                          title: response.data.message,
                          showConfirmButton: false,
                          timer: 1500,
+                         width:"15rem"
                     });
 
                     localStorage.setItem("token", response.data.token);

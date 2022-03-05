@@ -34,73 +34,97 @@ const UserManagement = () => {
      }, []);
 
      const Submit = (userInfo) => {
-          axios.post(updateUserStatus, userInfo, { headers: { "Content-Type": "application/json" } })
-               .then((response) => {
-                    const userStatus = response.data.userStatus;
+          Swal.fire({
+               title: "Are you sure?",
+               text: "You won't be able to revert this!",
+               icon: "warning",
+               showCancelButton: true,
+               confirmButtonColor: "#3085d6",
+               cancelButtonColor: "#d33",
+               confirmButtonText: "Yes, delete it!",
+          }).then((result) => {
+               if (result.isConfirmed) {
+                    axios.post(updateUserStatus, userInfo, { headers: { "Content-Type": "application/json" } })
+                         .then((response) => {
+                              const userStatus = response.data.userStatus;
 
-                    dispatch(setUserData({ userData: response.data.userData }));
-                    {
-                         userStatus.active
-                              ? Swal.fire({
-                                     position: "bottom-end",
-                                     icon: "success",
-                                     title: userStatus.name + "UnBlocked",
-                                     showConfirmButton: false,
-                                     timer: 1500,
-                                     height: "5rem",
-                                     width: "15rem",
-                                })
-                              : Swal.fire({
-                                     position: "bottom-end",
-                                     icon: "error",
-                                     title: userStatus.name + "Blocked",
-                                     showConfirmButton: false,
-                                     timer: 1500,
-                                     height: "5rem",
-                                     width: "15rem",
-                                });
-                    }
-               })
-               .catch((err) => {
-                    Swal.fire({
-                         position: "bottom-end",
-                         icon: "error",
-                         title: err.data.message,
-                         showConfirmButton: false,
-                         timer: 1500,
-                         height: "5rem",
-                         width: "15rem",
-                    });
-               });
+                              dispatch(setUserData({ userData: response.data.userData }));
+                              {
+                                   userStatus.active
+                                        ? Swal.fire({
+                                               position: "bottom-end",
+                                               icon: "success",
+                                               title: "UnBlocked",
+                                               showConfirmButton: false,
+                                               timer: 1500,
+                                               height: "5rem",
+                                               width: "15rem",
+                                          })
+                                        : Swal.fire({
+                                               position: "bottom-end",
+                                               icon: "error",
+                                               title: "Blocked",
+                                               showConfirmButton: false,
+                                               timer: 1500,
+                                               height: "5rem",
+                                               width: "15rem",
+                                          });
+                              }
+                         })
+                         .catch((err) => {
+                              Swal.fire({
+                                   position: "bottom-end",
+                                   icon: "error",
+                                   title: err.data.message,
+                                   showConfirmButton: false,
+                                   timer: 1500,
+                                   height: "5rem",
+                                   width: "15rem",
+                              });
+                         });
+               }
+          });
      };
 
      const DeleteUser = (userInfo) => {
-          axios.post(deleteUser, userInfo, { headers: { "Content-Type": "application/json" } })
-               .then((response) => {
-                    Swal.fire({
-                         position: "bottom-end",
-                         icon: "error",
-                         title: response.data.message,
-                         showConfirmButton: false,
-                         timer: 1500,
-                         height: "5rem",
-                         width: "15rem",
-                    });
-                    dispatch(setUserData({ userData: response.data.userData }));
-                    console.log(userData);
-               })
-               .catch((err) => {
-                    Swal.fire({
-                         position: "bottom-end",
-                         icon: "error",
-                         title: err.data.message,
-                         showConfirmButton: false,
-                         timer: 1500,
-                         height: "5rem",
-                         width: "15rem",
-                    });
-                    alert();
-               });
+          Swal.fire({
+               title: "Are you sure?",
+               text: "You won't be able to revert this!",
+               icon: "warning",
+               showCancelButton: true,
+               confirmButtonColor: "#3085d6",
+               cancelButtonColor: "#d33",
+               confirmButtonText: "Yes, delete it!",
+          }).then((result) => {
+               if (result.isConfirmed) {
+                    axios.post(deleteUser, userInfo, { headers: { "Content-Type": "application/json" } })
+                         .then((response) => {
+                              Swal.fire({
+                                   position: "bottom-end",
+                                   icon: "error",
+                                   title: response.data.message,
+                                   showConfirmButton: false,
+                                   timer: 1500,
+                                   height: "5rem",
+                                   width: "15rem",
+                              });
+                              dispatch(setUserData({ userData: response.data.userData }));
+                              console.log(userData);
+                         })
+                         .catch((err) => {
+                              Swal.fire({
+                                   position: "bottom-end",
+                                   icon: "error",
+                                   title: err.data.message,
+                                   showConfirmButton: false,
+                                   timer: 1500,
+                                   height: "5rem",
+                                   width: "15rem",
+                              });
+                              alert();
+                         });
+               }
+          });
      };
 
      return (
