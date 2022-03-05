@@ -17,7 +17,7 @@ import axios from "axios";
 import { getUsers, updateUserStatus, deleteUser } from "../../utlis/Constants";
 import EditUSer from "./components/EditUser";
 import { useSelector, useDispatch } from "react-redux";
-import { setUserData } from "../../Redux/userData/userData";
+import { setUserData } from "../../Redux";
 
 const UserManagement = () => {
      const dispatch = useDispatch();
@@ -121,7 +121,6 @@ const UserManagement = () => {
                                    height: "5rem",
                                    width: "15rem",
                               });
-                              alert();
                          });
                }
           });

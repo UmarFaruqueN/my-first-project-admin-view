@@ -1,24 +1,32 @@
 import React, { useEffect } from "react";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import { Button, Typography } from "@mui/material";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import { useForm } from "react-hook-form";
-import { addCategory, getCategory, deleteCategory } from "../../utlis/Constants";
+import {
+     Button,
+     Typography,
+     Box,
+     TextField,
+     Table,
+     TableBody,
+     TableCell,
+     TableHead,
+     TableRow,
+     Paper,
+     TableContainer,
+     InputLabel,
+     MenuItem,
+     Select,
+} from "@mui/material";
+
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { setCategory } from "../../Redux/category/category";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditCateButton from "../Buttons/EditCateButton";
+import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 
-const CategoryManagement = () => {
+import { addCategory, getCategory, deleteCategory } from "../../../utlis/Constants";
+import { setCategory } from "../../../Redux/category/category";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditSubCategoryDialouge from "./components/EditSubCategoryDialouge";
+
+const SubCategoryManagement = () => {
      const dispatch = useDispatch();
      const category = useSelector((state) => state.category.value);
 
@@ -95,37 +103,6 @@ const CategoryManagement = () => {
 
      return (
           <>
-               <Box
-                    component="form"
-                    sx={{
-                         "& > :not(style)": { m: 1, width: "25ch" },
-                         display: "flex",
-                         alignItems: "center",
-                    }}
-                    noValidate
-                    autoComplete="off"
-               >
-                    <TextField
-                         label="Category"
-                         color="secondary"
-                         margin="normal"
-                         fullWidth
-                         id="category"
-                         name="category"
-                         {...register("category", {
-                              required: "Category Required",
-                         })}
-                    />
-
-                    <Typography type="inline" color="error">
-                         {errors.category?.message}
-                    </Typography>
-
-                    <Button color="secondary" variant="contained" onClick={Submit}>
-                         {" "}
-                         Add Category
-                    </Button>
-               </Box>
 
                <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 650 }} aria-label="caption table">
@@ -143,7 +120,7 @@ const CategoryManagement = () => {
                                              {obj.category}
                                         </TableCell>
                                         <TableCell align="right">
-                                             <EditCateButton data={obj} />
+                                             <EditSubCategoryDialouge data={obj} />
                                         </TableCell>
                                         <TableCell align="right">
                                              <DeleteIcon
@@ -163,4 +140,4 @@ const CategoryManagement = () => {
      );
 };
 
-export default CategoryManagement;
+export default SubCategoryManagement;

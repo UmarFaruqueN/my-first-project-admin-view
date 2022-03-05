@@ -1,11 +1,10 @@
 import React from "react";
-import { Layout } from "../Components";
-import CategoryManagement from "../Components/CategoryManagment/CategoryManagement";
+import { Categories, Layout } from "../Components";
 
 const CategoryHome = () => {
      return (
           <Layout>
-               <CategoryManagement />
+               <Categories />
           </Layout>
      );
 };
