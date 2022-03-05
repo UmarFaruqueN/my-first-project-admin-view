@@ -11,24 +11,21 @@ import {
      TableRow,
      Paper,
      TableContainer,
-     InputLabel,
-     MenuItem,
-     Select,
 } from "@mui/material";
-
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 
-import { addCategory, getCategory, deleteCategory } from "../../../utlis/Constants";
-import { setCategory } from "../../../Redux/category/category";
+import { getSubCategory, deleteSubCategory } from "../../../utlis/Constants";
+import { setSubCategory } from "../../../Redux";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditSubCategoryDialouge from "./components/EditSubCategoryDialouge";
+import AddSubCategoryDialouge from "./components/AddSubCategoryDialouge";
 
 const SubCategoryManagement = () => {
      const dispatch = useDispatch();
-     const category = useSelector((state) => state.category.value);
+     const subCategory = useSelector((state) => state.subCategory.value);
 
      const {
           register,
@@ -37,29 +34,17 @@ const SubCategoryManagement = () => {
      } = useForm();
 
      useEffect(() => {
-          axios.get(getCategory, { headers: { "Content-Type": "application/json" } })
+          axios.get(getSubCategory, { headers: { "Content-Type": "application/json" } })
                .then((response) => {
                     // alert(response.data.message)
-                    dispatch(setCategory({ category: response.data?.allCategory }));
-                    console.log(category);
+                    dispatch(setSubCategory({ subCategory: response.data?.subCategoryData }));
+                    console.log(subCategory);
                })
                .catch((err) => {
                     console.log(err.response.data.message);
                     alert(err.response.data.message);
                });
      }, []);
-
-     const Submit = handleSubmit((data) => {
-          axios.post(addCategory, data, { headers: { "Content-Type": "application/json" } })
-               .then((response) => {
-                    dispatch(setCategory({ category: response.data?.allCategory }));
-                    console.log(category);
-               })
-               .catch((err) => {
-                    console.log(err.response.data.message);
-                    alert(err.response.data.message);
-               });
-     });
 
      const DeleteCategory = (catData) => {
           Swal.fire({
@@ -72,7 +57,7 @@ const SubCategoryManagement = () => {
                confirmButtonText: "Yes, delete it!",
           }).then((result) => {
                if (result.isConfirmed) {
-                    axios.post(deleteCategory, catData, { headers: { "Content-Type": "application/json" } })
+                    axios.post(deleteSubCategory, catData, { headers: { "Content-Type": "application/json" } })
                          .then((response) => {
                               Swal.fire({
                                    position: "bottom-end",
@@ -83,8 +68,8 @@ const SubCategoryManagement = () => {
                                    width: "15rem",
                               });
 
-                              dispatch(setCategory({ category: response.data?.categoryData }));
-                              console.log(category);
+                              dispatch(setSubCategory({ subCategory: response.data?.subCategoryData }));
+                              console.log(subCategory);
                          })
                          .catch((err) => {
                               Swal.fire({
@@ -103,21 +88,39 @@ const SubCategoryManagement = () => {
 
      return (
           <>
+               <Box
+                    component="form"
+                    sx={{
+                         "& > :not(style)": { m: 1, width: "25ch" },
+                         display: "flex",
+                         alignItems: "center",
+                         justifyContent: "space-around",
+                    }}
+                    noValidate
+                    autoComplete="off"
+               >
+                    <AddSubCategoryDialouge />
+               </Box>
 
                <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 650 }} aria-label="caption table">
                          <TableHead>
                               <TableRow>
                                    <TableCell>Category Name</TableCell>
+                                   <TableCell>SubCategory Name</TableCell>
+
                                    <TableCell align="right">Update</TableCell>
                                    <TableCell align="right">Delete</TableCell>
                               </TableRow>
                          </TableHead>
                          <TableBody>
-                              {category?.map((obj) => (
-                                   <TableRow key={obj.categoryCode}>
+                              {subCategory?.map((obj) => (
+                                   <TableRow key={obj._id}>
                                         <TableCell component="th" scope="row">
                                              {obj.category}
+                                        </TableCell>
+                                        <TableCell component="th" scope="row">
+                                             {obj.subCategory}
                                         </TableCell>
                                         <TableCell align="right">
                                              <EditSubCategoryDialouge data={obj} />

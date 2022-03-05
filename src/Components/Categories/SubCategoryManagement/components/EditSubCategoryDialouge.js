@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import { TextField, Dialog, DialogActions, DialogContent, DialogTitle, DialogContentText, Button } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import { useForm } from "react-hook-form";
@@ -6,11 +6,10 @@ import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
 import Swal from "sweetalert2";
-
-import { updateCategory } from "../../../../utlis/Constants";
-
 import { useDispatch } from "react-redux";
-import { setCategory } from "../../../../Redux";
+
+import { updateSubCategory } from "../../../../utlis/Constants";
+import { setSubCategory } from "../../../.../../../Redux";
 
 const EditSubCategoryDialouge = (props) => {
      const [open, setOpen] = useState(false);
@@ -19,6 +18,7 @@ const EditSubCategoryDialouge = (props) => {
 
      const formSchema = Yup.object().shape({
           category: Yup.string().required("Category required"),
+          subCategory: Yup.string().required("Category required"),
      });
 
      const {
@@ -29,6 +29,7 @@ const EditSubCategoryDialouge = (props) => {
           mode: "onTouched",
           resolver: yupResolver(formSchema),
           defaultValues: {
+               subCategory: props.data.subCategory,
                category: props.data.category,
                _id: props.data._id,
           },
@@ -38,7 +39,7 @@ const EditSubCategoryDialouge = (props) => {
 
      const Submit = handleSubmit((data) => {
           console.log(data);
-          axios.post(updateCategory, data, { headers: { "Content-Type": "application/json" } })
+          axios.post(updateSubCategory, data, { headers: { "Content-Type": "application/json" } })
                .then((response) => {
                     Swal.fire({
                          position: "bottom-end",
@@ -51,7 +52,7 @@ const EditSubCategoryDialouge = (props) => {
                     });
                     console.log(response);
 
-                    dispatch(setCategory({ category: response.data.categoryData }));
+                    dispatch(setSubCategory({ subCategory: response.data.subCategoryData }));
                     setOpen(false);
                })
                .catch((err) => {
@@ -72,28 +73,32 @@ const EditSubCategoryDialouge = (props) => {
           setOpen(true);
      };
 
+
+
+     
+
      return (
           <div>
                <EditIcon cursor="pointer" onClick={handleClickOpen} color="secondary" />
                <Dialog open={open} onClose={Submit}>
-                    <DialogTitle>Edit Category</DialogTitle>
+                    <DialogTitle>Edit Sub Category</DialogTitle>
                     <DialogContent color="secondary">
                          <DialogContentText color="secondary">Category</DialogContentText>
 
                          <div className="form-group mb-3">
                               <TextField
-                                   label="Category"
+                                   label="Sub Category"
                                    color="secondary"
                                    margin="normal"
                                    fullWidth
-                                   id="category"
-                                   name="category"
-                                   {...register("category", {
-                                        required: "Category Required",
+                                   id="subCategory"
+                                   name="subCategory"
+                                   {...register("subCategory", {
+                                        required: "Sub Category Required",
                                    })}
                               />
 
-                              <DialogContentText color="error">{errors.category?.message}</DialogContentText>
+                              <DialogContentText color="error">{errors.subCategory?.message}</DialogContentText>
                          </div>
                     </DialogContent>
                     <DialogActions>

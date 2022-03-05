@@ -36,12 +36,12 @@ const UserManagement = () => {
      const Submit = (userInfo) => {
           Swal.fire({
                title: "Are you sure?",
-               text: "You won't be able to revert this!",
+               text: "Do You want to Update User Status!",
                icon: "warning",
                showCancelButton: true,
                confirmButtonColor: "#3085d6",
                cancelButtonColor: "#d33",
-               confirmButtonText: "Yes, delete it!",
+               confirmButtonText: "Yes, Update User!",
           }).then((result) => {
                if (result.isConfirmed) {
                     axios.post(updateUserStatus, userInfo, { headers: { "Content-Type": "application/json" } })
@@ -53,8 +53,8 @@ const UserManagement = () => {
                                    userStatus.active
                                         ? Swal.fire({
                                                position: "bottom-end",
-                                               icon: "success",
-                                               title: "UnBlocked",
+                                               icon: "error",
+                                               title: "Blocked",
                                                showConfirmButton: false,
                                                timer: 1500,
                                                height: "5rem",
@@ -62,8 +62,8 @@ const UserManagement = () => {
                                           })
                                         : Swal.fire({
                                                position: "bottom-end",
-                                               icon: "error",
-                                               title: "Blocked",
+                                               icon: "success",
+                                               title: "UnBlocked",
                                                showConfirmButton: false,
                                                timer: 1500,
                                                height: "5rem",

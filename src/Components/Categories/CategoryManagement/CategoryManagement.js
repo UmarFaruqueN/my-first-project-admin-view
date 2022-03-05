@@ -17,7 +17,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 
-import { addCategory, getCategory, deleteCategory } from "../../../utlis/Constants";
+import {getCategory, deleteCategory } from "../../../utlis/Constants";
 import { setCategory } from "../../../Redux/category/category";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditCategoryDialouge from "./components/EditCategoryDialouge";

@@ -15,6 +15,12 @@ export const getCategory = "http://localhost:4000/category/get";
 export const updateCategory = "http://localhost:4000/category/update";  
 export const deleteCategory = "http://localhost:4000/category/delete";
 
+//Sub Category Management
+export const addSubCategory = "http://localhost:4000/subCategory/add";
+export const getSubCategory = "http://localhost:4000/subCategory/get";
+export const updateSubCategory = "http://localhost:4000/subCategory/update";  
+export const deleteSubCategory = "http://localhost:4000/subCategory/delete";
+
 //Product Management
 export const addProduct = "http://localhost:4000/product/add";
 export const getProduct = "http://localhost:4000/product/get";

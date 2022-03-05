@@ -1,113 +1,163 @@
-import React, { useState } from "react";
-import { TextField, Dialog, DialogActions, DialogContent, DialogTitle, DialogContentText, Button } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import {
+     TextField,
+     Dialog,
+     DialogActions,
+     DialogContent,
+     DialogTitle,
+     DialogContentText,
+     Button,
+     Select,
+     MenuItem,
+} from "@mui/material";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { updateCategory } from "../../utlis/Constants";
 import axios from "axios";
-import EditIcon from "@mui/icons-material/Edit";
-import { useDispatch } from "react-redux";
-import { setCategory } from "../../Redux/category/category";
+import Swal from "sweetalert2";
+import { useDispatch, useSelector } from "react-redux";
+
+import { addSubCategory, getCategory } from "../../../../utlis/Constants";
+import { setSubCategory, setCategory } from "../../../.../../../Redux";
 
 const AddSubCategoryDialouge = () => {
-    const [open, setOpen] = useState(false);
-    const dispatch = useDispatch();
-    //form validation
+     const category = useSelector((state) => state.category.value);
+     const [open, setOpen] = useState(false);
+     const dispatch = useDispatch();
+     //form validation
 
-    const formSchema = Yup.object().shape({
-        category: Yup.string().required("Category Required"),
-        subCategory: Yup.string().required("Sub Category required"),
-    });
+     const formSchema = Yup.object().shape({
+          category: Yup.string().required("Category required"),
+          subCategory: Yup.string().required("Sub Category required"),
+     });
 
-    const {
-        register,
-        formState: { errors },
-        handleSubmit,
-    } = useForm({
-        mode: "onTouched",
-        resolver: yupResolver(formSchema),
-    });
+     const {
+          register,
+          formState: { errors },
+          handleSubmit,
+     } = useForm({
+          mode: "onTouched",
+          resolver: yupResolver(formSchema),
+     });
 
-    const Submit = handleSubmit((data) => {
-        console.log(data);
-        axios
-            .post(updateCategory, data, { headers: { "Content-Type": "application/json" } })
-            .then((response) => {
-                console.log(response);
-                alert(response.data.message);
-                dispatch(setCategory({ category: response.data.categoryData }));
-                setOpen(false);
-            })
-            .catch((err) => {
-                console.log(err.response.data.message);
-                alert(err.response.data.message);
-            });
-    });
-    //form validation ends here
+     //form validation ends here
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
+     const Submit = handleSubmit((data) => {
+          console.log(data);
+          axios.post(addSubCategory, data, { headers: { "Content-Type": "application/json" } })
+               .then((response) => {
+                    Swal.fire({
+                         position: "bottom-end",
+                         icon: "success",
+                         text: response.data.message,
+                         showConfirmButton: false,
+                         timer: 1500,
+                         height: "5rem",
+                         width: "15rem",
+                    });
+                    console.log(response);
+                    dispatch(setSubCategory({ category: response.data.categoryData }));
+                    setOpen(false);
 
-    return (
-        <div>
-            <EditIcon cursor="pointer" onClick={handleClickOpen} color="secondary" />
-            <Dialog open={open} onClose={Submit}>
-                <DialogTitle>Add SubCategory</DialogTitle>
-                <DialogContent color="secondary">
-                    <DialogContentText color="secondary">Category</DialogContentText>
+                    
 
-                    <div className="form-group mb-3">
-                        <TextField
-                            label="Category Code"
-                            color="secondary"
-                            margin="normal"
-                            fullWidth
-                            id="categoryCode"
-                            name="categoryCode"
-                            {...register("categoryCode", {
-                                required: "Category Code Required",
-                            })}
-                        />
+               })
+               .catch((err) => {
+                    Swal.fire({
+                         position: "bottom-end",
+                         icon: "error",
+                         text: err.response.data.message,
+                         showConfirmButton: false,
+                         timer: 1500,
+                         height: "5rem",
+                         width: "15rem",
+                    });
+                    console.log(err.response.data.message);
+               });
+     });
 
-                        <DialogContentText color="error">{errors.category?.message}</DialogContentText>
-                    </div>
+     const handleClickOpen = () => {
+          setOpen(true);
+     };
 
-                    <DialogContentText color="secondary">Sub Category</DialogContentText>
+     useEffect(() => {
+          axios.get(getCategory, { headers: { "Content-Type": "application/json" } })
+               .then((response) => {
+                    // alert(response.data.message)
+                    dispatch(setCategory({ category: response.data?.allCategory }));
+                    console.log(category);
+               })
+               .catch((err) => {
+                    console.log(err.response.data.message);
+                    alert(err.response.data.message);
+               });
+     }, []);
 
-                    <div className="form-group mb-3">
-                        <TextField
-                            label="Sub Category"
-                            color="secondary"
-                            margin="normal"
-                            fullWidth
-                            id="subCategory"
-                            name="subCategory"
-                            {...register("subCategory", {
-                                required: "Sub Category Required",
-                            })}
-                        />
+     return (
+          <div>
+               <Button color="secondary" variant="contained" onClick={handleClickOpen}>
+                    Add Sub Category
+               </Button>
+               <Dialog open={open} onClose={Submit}>
+                    <DialogTitle>Add Sub Category</DialogTitle>
+                    <DialogContent color="secondary">
+                         <DialogContentText color="secondary">Category</DialogContentText>
 
-                        <DialogContentText color="error">{errors.subCategory?.message}</DialogContentText>
-                    </div>
-                </DialogContent>
-                <DialogActions>
-                    <Button
-                        color="secondary"
-                        cursor="pointer"
-                        onClick={() => {
-                            setOpen(false);
-                        }}
-                    >
-                        Cancel
-                    </Button>
-                    <Button color="secondary" cursor="pointer" onClick={Submit}>
-                        Submit
-                    </Button>
-                </DialogActions>
-            </Dialog>
-        </div>
-    );
+                         <div>
+                              <Select
+                                   label="Category"
+                                   color="secondary"
+                                   margin="normal"
+                                   fullWidth
+                                   id="category"
+                                   name="category"
+                                   {...register("category", {
+                                        required: "Category Required",
+                                   })}
+                              >
+                                   {category.map((obj) => (
+                                        <MenuItem value={obj.category}>{obj.category}</MenuItem>
+                                   ))}
+                              </Select>
+                              <DialogContentText color="error">{errors.category?.message}</DialogContentText>
+                         </div>
+                    </DialogContent>
+                    <DialogContent color="secondary">
+                         <DialogContentText color="secondary">Category</DialogContentText>
+
+                         <div>
+                              <TextField
+                                   label="Sub Category"
+                                   color="secondary"
+                                   margin="normal"
+                                   fullWidth
+                                   id="subCategory"
+                                   name="subCategory"
+                                   {...register("subCategory", {
+                                        required: "Sub Category Required",
+                                   })}
+                              />
+
+                              <DialogContentText color="error">{errors.subCategory?.message}</DialogContentText>
+                         </div>
+                    </DialogContent>
+                    <DialogActions>
+                         <Button
+                              color="secondary"
+                              cursor="pointer"
+                              onClick={() => {
+                                   setOpen(false);
+                              }}
+                         >
+                              Cancel
+                         </Button>
+                         <Button color="secondary" cursor="pointer" onClick={Submit}>
+                              Submit
+                         </Button>
+                    </DialogActions>
+               </Dialog>
+          </div>
+     );
 };
 
 export default AddSubCategoryDialouge;

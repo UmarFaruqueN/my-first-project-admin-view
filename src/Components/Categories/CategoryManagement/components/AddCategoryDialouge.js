@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import { TextField, Dialog, DialogActions, DialogContent, DialogTitle, DialogContentText, Button } from "@mui/material";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
@@ -11,6 +11,8 @@ import { addCategory } from "../../../../utlis/Constants";
 import { setCategory } from "../../../.../../../Redux";
 
 const AddCategoryDialouge = () => {
+
+
      const [open, setOpen] = useState(false);
      const dispatch = useDispatch();
      //form validation
@@ -34,6 +36,7 @@ const AddCategoryDialouge = () => {
           console.log(data);
           axios.post(addCategory, data, { headers: { "Content-Type": "application/json" } })
                .then((response) => {
+                    dispatch(setCategory({ category: response.data.categoryData }));
                     Swal.fire({
                          position: "bottom-end",
                          icon: "success",
@@ -44,9 +47,8 @@ const AddCategoryDialouge = () => {
                          width: "15rem",
                     });
                     console.log(response);
-
-                    dispatch(setCategory({ category: response.data.categoryData }));
                     setOpen(false);
+          
                })
                .catch((err) => {
                     Swal.fire({
@@ -72,7 +74,7 @@ const AddCategoryDialouge = () => {
                     Add Category
                </Button>
                <Dialog open={open} onClose={Submit}>
-                    <DialogTitle>Edit Category</DialogTitle>
+                    <DialogTitle>Add Category</DialogTitle>
                     <DialogContent color="secondary">
                          <DialogContentText color="secondary">Category</DialogContentText>
 
@@ -80,7 +82,7 @@ const AddCategoryDialouge = () => {
                               <TextField
                                    label="Category"
                                    color="secondary"
-                                   margin="normal"
+                                   margin="normal"X    
                                    fullWidth
                                    id="category"
                                    name="category"
