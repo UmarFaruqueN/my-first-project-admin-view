@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -9,6 +10,8 @@ import Paper from "@mui/material/Paper";
 import DoneIcon from "@mui/icons-material/Done";
 import BlockIcon from "@mui/icons-material/Block";
 import DeleteIcon from "@mui/icons-material/Delete";
+
+import Swal from "sweetalert2";
 
 import axios from "axios";
 import { getUsers, updateUserStatus, deleteUser } from "../../utlis/Constants";
@@ -23,41 +26,80 @@ const UserManagement = () => {
      useEffect(() => {
           axios.get(getUsers, { headers: { "Content-Type": "application/json" } })
                .then((response) => {
-                    // alert(response.data.message)
                     dispatch(setUserData({ userData: response.data.userData }));
-                    console.log(userData);
                })
                .catch((err) => {
-                    console.log(err.response.data.message);
                     alert(err.data.message);
                });
      }, []);
 
      const Submit = (userInfo) => {
-          console.log("info");
-          console.log(userInfo);
           axios.post(updateUserStatus, userInfo, { headers: { "Content-Type": "application/json" } })
                .then((response) => {
-                    alert(response.data.message);
+                    const userStatus = response.data.userStatus;
+
                     dispatch(setUserData({ userData: response.data.userData }));
-                    console.log(userData);
+                    {
+                         userStatus.active
+                              ? Swal.fire({
+                                     position: "bottom-end",
+                                     icon: "success",
+                                     title: userStatus.name + "UnBlocked",
+                                     showConfirmButton: false,
+                                     timer: 1500,
+                                     height: "5rem",
+                                     width: "15rem",
+                                })
+                              : Swal.fire({
+                                     position: "bottom-end",
+                                     icon: "error",
+                                     title: userStatus.name + "Blocked",
+                                     showConfirmButton: false,
+                                     timer: 1500,
+                                     height: "5rem",
+                                     width: "15rem",
+                                });
+                    }
                })
                .catch((err) => {
-                    console.log(err.response.data.message);
-                    alert(err.data.message);
+                    Swal.fire({
+                         position: "bottom-end",
+                         icon: "error",
+                         title: err.data.message,
+                         showConfirmButton: false,
+                         timer: 1500,
+                         height: "5rem",
+                         width: "15rem",
+                    });
                });
      };
 
      const DeleteUser = (userInfo) => {
           axios.post(deleteUser, userInfo, { headers: { "Content-Type": "application/json" } })
                .then((response) => {
-                    alert(response.data.message);
+                    Swal.fire({
+                         position: "bottom-end",
+                         icon: "error",
+                         title: response.data.message,
+                         showConfirmButton: false,
+                         timer: 1500,
+                         height: "5rem",
+                         width: "15rem",
+                    });
                     dispatch(setUserData({ userData: response.data.userData }));
                     console.log(userData);
                })
                .catch((err) => {
-                    console.log(err.response.data.message);
-                    alert(err.data.message);
+                    Swal.fire({
+                         position: "bottom-end",
+                         icon: "error",
+                         title: err.data.message,
+                         showConfirmButton: false,
+                         timer: 1500,
+                         height: "5rem",
+                         width: "15rem",
+                    });
+                    alert();
                });
      };
 
