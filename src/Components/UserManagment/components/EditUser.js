@@ -4,11 +4,11 @@ import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import EditIcon from "@mui/icons-material/Edit";
+import { useDispatch } from "react-redux";
+import Swal from "sweetalert2";
+import axios from "axios";
 
 import { updateUser } from "../../../utlis/Constants";
-
-import axios from "axios";
-import { useDispatch } from "react-redux";
 import { setUserData } from "../../../Redux/userData/userData";
 
 const EditUSer = (props) => {
@@ -42,13 +42,31 @@ const EditUSer = (props) => {
           axios.post(updateUser, data, { headers: { "Content-Type": "application/json" } })
                .then((response) => {
                     console.log(response);
-                    alert(response.data.message);
+
+                    Swal.fire({
+                         position: "bottom-end",
+                         icon: "success",
+                         text: response.data.message,
+                         showConfirmButton: false,
+                         timer: 1500,
+                         height: "5rem",
+                         width: "15rem",
+                    });
+
                     dispatch(setUserData({ userData: response.data.userData }));
                     setOpen(false);
                })
                .catch((err) => {
                     console.log(err.response.data.message);
-                    alert(err.response.data.message);
+                    Swal.fire({
+                         position: "bottom-end",
+                         icon: "success",
+                         text: err.response.data.message,
+                         showConfirmButton: false,
+                         timer: 1500,
+                         height: "5rem",
+                         width: "15rem",
+                    });
                });
      });
      //form validation ends here
