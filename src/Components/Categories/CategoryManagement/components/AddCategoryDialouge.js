@@ -1,4 +1,4 @@
-import React, { useState ,useEffect} from "react";
+import React, { useState } from "react";
 import { TextField, Dialog, DialogActions, DialogContent, DialogTitle, DialogContentText, Button } from "@mui/material";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
@@ -7,12 +7,9 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 
-import { addCategory } from "../../../../utlis/Constants";
-import { setCategory } from "../../../.../../../Redux";
+import { addCategory, setCategory } from "../../";
 
 const AddCategoryDialouge = () => {
-
-
      const [open, setOpen] = useState(false);
      const dispatch = useDispatch();
      //form validation
@@ -48,8 +45,7 @@ const AddCategoryDialouge = () => {
                     });
                     console.log(response);
                     setOpen(false);
-                    window.location.reload()
-          
+                    window.location.reload();
                })
                .catch((err) => {
                     Swal.fire({
@@ -83,7 +79,8 @@ const AddCategoryDialouge = () => {
                               <TextField
                                    label="Category"
                                    color="secondary"
-                                   margin="normal"X    
+                                   margin="normal"
+                                   X
                                    fullWidth
                                    id="category"
                                    name="category"

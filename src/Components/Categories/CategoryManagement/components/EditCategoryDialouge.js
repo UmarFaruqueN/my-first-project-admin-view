@@ -8,8 +8,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 
-import { updateCategory } from "../../../../utlis/Constants";
-import { setCategory } from "../../../.../../../Redux";
+import { updateCategory, setCategory } from "../../";
 
 const EditCategoryDialouge = (props) => {
      const [open, setOpen] = useState(false);

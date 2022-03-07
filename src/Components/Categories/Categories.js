@@ -4,9 +4,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 
-import CategoryManagement from "./CategoryManagement/CategoryManagement";
-import SubCategoryManagement from "./SubCategoryManagement/SubCategoryManagement";
-import TypeManagement from "./TypeManagement/TypeManagement";
+import { CategoryManagement, SubCategoryManagement, TypeManagement } from "./";
 
 function TabPanel(props) {
      const { children, value, index, ...other } = props;

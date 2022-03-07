@@ -8,8 +8,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 
-import { updateType } from "../../../../utlis/Constants";
-import { setType } from "../../../../Redux";
+import { updateType, setType } from "../../";
 
 const EditTypeDialouge = (props) => {
      const [open, setOpen] = useState(false);

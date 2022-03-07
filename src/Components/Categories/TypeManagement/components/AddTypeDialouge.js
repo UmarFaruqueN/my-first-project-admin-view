@@ -7,8 +7,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 
-import { addType } from "../../../../utlis/Constants";
-import { setType } from "../../../../Redux";
+import { addType, setType } from "../../";
 
 const AddTypeDialouge = () => {
      const [open, setOpen] = useState(false);

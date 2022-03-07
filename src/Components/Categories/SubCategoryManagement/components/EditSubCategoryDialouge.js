@@ -1,4 +1,4 @@
-import React, { useState , useEffect} from "react";
+import React, { useState } from "react";
 import { TextField, Dialog, DialogActions, DialogContent, DialogTitle, DialogContentText, Button } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import { useForm } from "react-hook-form";
@@ -8,8 +8,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 
-import { updateSubCategory } from "../../../../utlis/Constants";
-import { setSubCategory } from "../../../.../../../Redux";
+import { updateSubCategory, setSubCategory } from "../../";
 
 const EditSubCategoryDialouge = (props) => {
      const [open, setOpen] = useState(false);
@@ -72,10 +71,6 @@ const EditSubCategoryDialouge = (props) => {
      const handleClickOpen = () => {
           setOpen(true);
      };
-
-
-
-     
 
      return (
           <div>

@@ -17,8 +17,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
 
-import { addSubCategory, getCategory } from "../../../../utlis/Constants";
-import { setSubCategory, setCategory } from "../../../.../../../Redux";
+import { addSubCategory, getCategory, setSubCategory, setCategory } from "../../";
 
 const AddSubCategoryDialouge = () => {
      const category = useSelector((state) => state.category.value);
@@ -58,10 +57,7 @@ const AddSubCategoryDialouge = () => {
                     console.log(response);
                     dispatch(setSubCategory({ category: response.data.categoryData }));
                     setOpen(false);
-                    window.location.reload()
-
-                    
-
+                    window.location.reload();
                })
                .catch((err) => {
                     Swal.fire({

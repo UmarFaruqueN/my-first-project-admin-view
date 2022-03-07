@@ -1,27 +1,12 @@
 import React, { useEffect } from "react";
-import {
-     Button,
-     Typography,
-     Box,
-     TextField,
-     Table,
-     TableBody,
-     TableCell,
-     TableHead,
-     TableRow,
-     Paper,
-     TableContainer,
-} from "@mui/material";
+import { Box, Table, TableBody, TableCell, TableHead, TableRow, Paper, TableContainer } from "@mui/material";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
+import DeleteIcon from "@mui/icons-material/Delete";
 import Swal from "sweetalert2";
 
-import {getCategory, deleteCategory } from "../../../utlis/Constants";
-import { setCategory } from "../../../Redux/category/category";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditCategoryDialouge from "./components/EditCategoryDialouge";
-import AddCategoryDialouge from "./components/AddCategoryDialouge";
+import { getCategory, deleteCategory, setCategory, EditCategoryDialouge, AddCategoryDialouge } from "../";
 
 const CategoryManagement = () => {
      const dispatch = useDispatch();

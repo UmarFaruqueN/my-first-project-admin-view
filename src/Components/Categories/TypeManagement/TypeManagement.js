@@ -1,27 +1,12 @@
 import React, { useEffect } from "react";
-import {
-     Button,
-     Typography,
-     Box,
-     TextField,
-     Table,
-     TableBody,
-     TableCell,
-     TableHead,
-     TableRow,
-     Paper,
-     TableContainer,
-} from "@mui/material";
+import { Box, Table, TableBody, TableCell, TableHead, TableRow, Paper, TableContainer } from "@mui/material";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
+import DeleteIcon from "@mui/icons-material/Delete";
 import Swal from "sweetalert2";
 
-import {getType, deleteType } from "../../../utlis/Constants";
-import { setType } from "../../../Redux/type/type";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditTypeDialouge from "./components/EditTypeDialouge";
-import AddTypeDialouge from "./components/AddTypeDialouge";
+import { getType, deleteType, setType, AddTypeDialouge, EditTypeDialouge } from "../";
 
 const TypeManagement = () => {
      const dispatch = useDispatch();
