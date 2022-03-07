@@ -1,4 +1,4 @@
-import React, { useState ,useEffect} from "react";
+import React, { useState } from "react";
 import { TextField, Dialog, DialogActions, DialogContent, DialogTitle, DialogContentText, Button } from "@mui/material";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
@@ -7,18 +7,16 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 
-import { addCategory } from "../../../../utlis/Constants";
-import { setCategory } from "../../../.../../../Redux";
+import { addType } from "../../../../utlis/Constants";
+import { setType } from "../../../../Redux";
 
-const AddCategoryDialouge = () => {
-
-
+const AddTypeDialouge = () => {
      const [open, setOpen] = useState(false);
      const dispatch = useDispatch();
      //form validation
 
      const formSchema = Yup.object().shape({
-          category: Yup.string().required("Category required"),
+          type: Yup.string().required("Type required"),
      });
 
      const {
@@ -34,9 +32,9 @@ const AddCategoryDialouge = () => {
 
      const Submit = handleSubmit((data) => {
           console.log(data);
-          axios.post(addCategory, data, { headers: { "Content-Type": "application/json" } })
+          axios.post(addType, data, { headers: { "Content-Type": "application/json" } })
                .then((response) => {
-                    dispatch(setCategory({ category: response.data.categoryData }));
+                    dispatch(setType({ type: response.data.typeData }));
                     Swal.fire({
                          position: "bottom-end",
                          icon: "success",
@@ -48,8 +46,7 @@ const AddCategoryDialouge = () => {
                     });
                     console.log(response);
                     setOpen(false);
-                    window.location.reload()
-          
+                    window.location.reload();
                })
                .catch((err) => {
                     Swal.fire({
@@ -72,27 +69,28 @@ const AddCategoryDialouge = () => {
      return (
           <div>
                <Button color="secondary" variant="contained" onClick={handleClickOpen}>
-                    Add Category
+                    Add Type
                </Button>
                <Dialog open={open} onClose={Submit}>
-                    <DialogTitle>Add Category</DialogTitle>
+                    <DialogTitle>Add Type</DialogTitle>
                     <DialogContent color="secondary">
-                         <DialogContentText color="secondary">Category</DialogContentText>
+                         <DialogContentText color="secondary">Type</DialogContentText>
 
                          <div className="form-group mb-3">
                               <TextField
-                                   label="Category"
+                                   label="Type"
                                    color="secondary"
-                                   margin="normal"X    
+                                   margin="normal"
+                                   X
                                    fullWidth
-                                   id="category"
-                                   name="category"
-                                   {...register("category", {
-                                        required: "Category Required",
+                                   id="type"
+                                   name="type"
+                                   {...register("type", {
+                                        required: "Type Required",
                                    })}
                               />
 
-                              <DialogContentText color="error">{errors.category?.message}</DialogContentText>
+                              <DialogContentText color="error">{errors.type?.message}</DialogContentText>
                          </div>
                     </DialogContent>
                     <DialogActions>
@@ -114,4 +112,4 @@ const AddCategoryDialouge = () => {
      );
 };
 
-export default AddCategoryDialouge;
+export default AddTypeDialouge;

@@ -58,6 +58,7 @@ const AddSubCategoryDialouge = () => {
                     console.log(response);
                     dispatch(setSubCategory({ category: response.data.categoryData }));
                     setOpen(false);
+                    window.location.reload()
 
                     
 
