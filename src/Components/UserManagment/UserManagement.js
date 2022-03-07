@@ -10,14 +10,11 @@ import Paper from "@mui/material/Paper";
 import DoneIcon from "@mui/icons-material/Done";
 import BlockIcon from "@mui/icons-material/Block";
 import DeleteIcon from "@mui/icons-material/Delete";
-
+import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
 import Swal from "sweetalert2";
 
-import axios from "axios";
-import { getUsers, updateUserStatus, deleteUser } from "../../utlis/Constants";
-import EditUSer from "./components/EditUser";
-import { useSelector, useDispatch } from "react-redux";
-import { setUserData } from "../../Redux";
+import { getUsers, updateUserStatus, deleteUser, EditUser, setUserData } from "./";
 
 const UserManagement = () => {
      const dispatch = useDispatch();
@@ -171,7 +168,7 @@ const UserManagement = () => {
                                    </TableCell>
 
                                    <TableCell align="center">
-                                        <EditUSer data={user} />
+                                        <EditUser data={user} />
                                    </TableCell>
 
                                    <TableCell align="center">

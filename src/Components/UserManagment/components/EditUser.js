@@ -8,10 +8,10 @@ import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 import axios from "axios";
 
-import { updateUser } from "../../../utlis/Constants";
-import { setUserData } from "../../../Redux/userData/userData";
+import { updateUser,setUserData } from "../";
 
-const EditUSer = (props) => {
+
+const EditUser = (props) => {
      const [open, setOpen] = useState(false);
      const dispatch = useDispatch();
      //form validation
@@ -145,4 +145,4 @@ const EditUSer = (props) => {
      );
 };
 
-export default EditUSer;
+export default EditUser;
