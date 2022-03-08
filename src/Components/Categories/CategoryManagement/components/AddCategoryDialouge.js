@@ -33,7 +33,7 @@ const AddCategoryDialouge = () => {
           console.log(data);
           axios.post(addCategory, data, { headers: { "Content-Type": "application/json" } })
                .then((response) => {
-                    dispatch(setCategory({ category: response.data.categoryData }));
+                    dispatch(setCategory({ category: response.data.allCategory }));
                     Swal.fire({
                          position: "bottom-end",
                          icon: "success",
@@ -45,7 +45,6 @@ const AddCategoryDialouge = () => {
                     });
                     console.log(response);
                     setOpen(false);
-                    window.location.reload();
                })
                .catch((err) => {
                     Swal.fire({

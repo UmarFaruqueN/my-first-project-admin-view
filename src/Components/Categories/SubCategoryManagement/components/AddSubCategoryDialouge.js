@@ -55,9 +55,8 @@ const AddSubCategoryDialouge = () => {
                          width: "15rem",
                     });
                     console.log(response);
-                    dispatch(setSubCategory({ category: response.data.categoryData }));
+                    dispatch(setSubCategory({ subCategory: response.data.allSubCategory }));
                     setOpen(false);
-                    window.location.reload();
                })
                .catch((err) => {
                     Swal.fire({

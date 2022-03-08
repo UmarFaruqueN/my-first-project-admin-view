@@ -27,3 +27,5 @@ export { default as SubCategoryManagement } from "./SubCategoryManagement/SubCat
 export { default as AddTypeDialouge } from "./TypeManagement/components/AddTypeDialouge";
 export { default as EditTypeDialouge } from "./TypeManagement/components/EditTypeDialouge";
 export { default as TypeManagement } from "./TypeManagement/TypeManagement";
+
+export {default as Categories} from "./Categories"

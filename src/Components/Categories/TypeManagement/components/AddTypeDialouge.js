@@ -33,7 +33,7 @@ const AddTypeDialouge = () => {
           console.log(data);
           axios.post(addType, data, { headers: { "Content-Type": "application/json" } })
                .then((response) => {
-                    dispatch(setType({ type: response.data.typeData }));
+                    dispatch(setType({ type: response.data.allType }));
                     Swal.fire({
                          position: "bottom-end",
                          icon: "success",
@@ -45,7 +45,6 @@ const AddTypeDialouge = () => {
                     });
                     console.log(response);
                     setOpen(false);
-                    window.location.reload();
                })
                .catch((err) => {
                     Swal.fire({
