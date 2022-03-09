@@ -8,6 +8,7 @@ export {default as LoginForm} from "./LoginForm/LoginForm"
 export {default as Layout } from "./Layout/Layout"
 export {UserManagement} from "./UserManagment"
 export {Categories} from "./Categories"
+export {ProductManagement} from "./ProductManagement"
 
 //components
 

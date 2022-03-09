@@ -7,6 +7,7 @@ import Login from "./Pages/Login";
 import UserHome from "./Pages/UserHome";
 import CategoryHome from "./Pages/CategoryHome";
 import ProductHome from "./Pages/ProductHome";
+import AddImage from "./Components/ProductManagement/Components/AddImage";
 
 function App() {
      const Token = localStorage.getItem("token");
@@ -20,6 +21,7 @@ function App() {
                          {Token && <Route exact path="/userManagement" element={<UserHome />} />}
                          {Token && <Route exact path="/categoryManagement" element={<CategoryHome />} />}
                          {Token && <Route exact path="/productManagement" element={<ProductHome />} />}
+                         <Route exact path="/test" element={<AddImage />} />
                     </Routes>
                </div>
           </ThemeProvider>

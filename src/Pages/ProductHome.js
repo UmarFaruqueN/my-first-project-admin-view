@@ -1,6 +1,5 @@
 import React from "react";
-import { Layout } from "../Components";
-import ProductManagement from "../Components/ProductManagement/ProductManagment";
+import { Layout ,ProductManagement} from "../Components";
 
 const ProductHome = () => {
      return (

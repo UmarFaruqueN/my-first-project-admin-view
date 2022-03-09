@@ -33,5 +33,11 @@ export const getProduct = "http://localhost:4000/product/get";
 export const updateProduct = "http://localhost:4000/product/update";
 export const deleteProduct = "http://localhost:4000/product/delete";
 
+//Image Management
+export const addImage = "http://localhost:4000/product/image/add";
+export const getImage = "http://localhost:4000/product/image/get";
+export const updateImage = "http://localhost:4000/product/image/update";
+export const deleteImage = "http://localhost:4000/product/image/delete";
+
 
     
