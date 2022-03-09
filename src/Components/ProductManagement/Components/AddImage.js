@@ -33,21 +33,22 @@ const AddImage = (props) => {
      const [img4State, setImg4State] = useState(null);
 
      const img1ref = useRef(null);
-     const img2ref = useRef(null);
+     const img2ref = useRef(null)
      const img3ref = useRef(null);
      const img4ref = useRef(null);
-
+const productInfo={_id:4444};
      const Submit = (e) => {
           e.preventDefault();
-          const formData = new FormData();
-          formData.append("img1",img1State)
-          formData.append("img2",img2State)
-          formData.append("img2",img3State)
-          formData.append("img3",img4State)
-          formData.append("productData",props.ProductData)
+          let formData = new FormData();  
+          formData.append('img1',img1State.img);
+          formData.append('img2',img2State.img);
+          formData.append('img3',img3State.img);
+          formData.append('img4',img4State.img);
+          formData.append('data',JSON.stringify(productInfo))
+ 
+       
 
-
-          axios.post(addImage, formData, { headers: { "Content-Type": "application/json" } })
+          axios.post(addImage, formData, { headers: { "Content-Type": "multipart/form-data" } })
           .then((response) => {
                dispatch(setProduct(response.data.allProduct));
                Swal.fire({
@@ -104,7 +105,7 @@ const AddImage = (props) => {
                const img = e.target.files[0];
                const url = URL.createObjectURL(img);
                setImg2State({ img, url });
-               console.log(img1State);
+               console.log(img2State);
           }
      };
      const onchangeImg3 = (e) => {
@@ -113,7 +114,7 @@ const AddImage = (props) => {
                const img = e.target.files[0];
                const url = URL.createObjectURL(img);
                setImg3State({ img, url });
-               console.log(img1State);
+               console.log(img3State);
           }
      };
      const onchangeImg4 = (e) => {
@@ -122,7 +123,7 @@ const AddImage = (props) => {
                const img = e.target.files[0];
                const url = URL.createObjectURL(img);
                setImg4State({ img, url });
-               console.log(img1State);
+               console.log(img4State);
           }
      };
 
@@ -130,7 +131,7 @@ const AddImage = (props) => {
 
      return (
           <div>
-               <Dialog  open={props.open} onClose={props.close} TransitionComponent={Transition}>
+               {/* <Dialog  open={props.open} onClose={props.close} TransitionComponent={Transition}> */}
                <ProductAddAppBar Close={props.close} title={"Add Image"} />
                <Grid pt={3} container rowSpacing={2} columnSpacing={2}>
                     <Grid className={classes.productImgGrid} item xs={6}>
@@ -176,7 +177,7 @@ const AddImage = (props) => {
                     </Grid>
                </Grid>
 
-               </Dialog>
+               {/* </Dialog> */}
           </div>
      );
 };
