@@ -19,9 +19,7 @@ import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 
-import { addProduct, ProductAddAppBar } from "../";
-import AddImage from "./AddImage";
-import { setProduct } from "../../../Redux";
+import { addProduct, ProductAddAppBar, setProducts, setProduct, AddImage } from "../";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
      return <Slide direction="up" ref={ref} {...props} />;
@@ -43,9 +41,6 @@ const AddProduct = () => {
 
      const handleClose = () => {
           setOpen(false);
-     };
-
-     const handleClose2 = () => {
           setImgOpen(false);
      };
 
@@ -78,15 +73,25 @@ const AddProduct = () => {
                ProductOffer: 0,
                CouponOffer: 0,
                Customers: [],
-               Images: [],
+               Image1: "",
+               Image1id: "",
+               Image2: "",
+               Image2id: "",
+               Image3: "",
+               Image3id: "",
+               Image4: "",
+               Image4id: "",
                rating: [],
           },
      });
 
+     // Submiting form data
+
      const Submit = handleSubmit((data) => {
           axios.post(addProduct, data, { headers: { "Content-Type": "application/json" } })
                .then((response) => {
-                    dispatch(setProduct(response.data.allProduct));
+                    dispatch(setProduct({ product: response.data.newProduct }));
+                    dispatch(setProducts({ products: response.data.allProduct }));
                     Swal.fire({
                          position: "bottom-end",
                          icon: "success",
@@ -98,17 +103,21 @@ const AddProduct = () => {
                     setImgOpen(true);
                })
                .catch((err) => {
+                    console.log(err);
+                    console.log("ENTHO ERRORE UND");
                     Swal.fire({
                          position: "bottom-end",
                          icon: "error",
-                         text: err.response.data.message,
+                         text: err?.response?.data?.message,
                          showConfirmButton: false,
                          timer: 1500,
                          width: "15rem",
                     });
-                    console.log(err.response.data.message);
+                    console.log(err?.response?.data?.message);
                });
      });
+
+     // for dropdown in the form
 
      const handleChange = (event) => {
           setCategory(event.target.value);
@@ -121,11 +130,11 @@ const AddProduct = () => {
 
      return (
           <div>
-               <AddImage open={imgOpen} close={handleClose2} />
+               <AddImage open={imgOpen} close={handleClose} />
                <Button variant="contained" color="secondary" onClick={handleClickOpen}>
                     Add Products
                </Button>
-               <Dialog  open={open} onClose={handleClose} TransitionComponent={Transition}>
+               <Dialog open={open} onClose={handleClose} TransitionComponent={Transition}>
                     <ProductAddAppBar Close={handleClose} title={"Add Product"} />
                     <Container sx={{ paddingTop: "10px" }}>
                          <Grid pt={10} container rowSpacing={2} columnSpacing={2}>

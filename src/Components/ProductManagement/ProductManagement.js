@@ -7,17 +7,17 @@ import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-import { AddProduct, getProduct, deleteProduct, setProduct, setCategory, setSubCategory, setType } from "./";
+import { AddProduct, getProduct, deleteProduct, setProducts, setCategory, setSubCategory, setType } from "./";
 
 function ProductManagement() {
      const dispatch = useDispatch();
-     const products = useSelector((state) => state.product.value);
+     const allProducts = useSelector((state) => state.products.value);
      useEffect(() => {
           axios.get(getProduct, { headers: { "Content-Type": "application/json" } })
                .then((response) => {
                     console.log("success");
                     console.log(response.data.allProduct);
-                    dispatch(setProduct({ product: response.data.allProduct }));
+                    dispatch(setProducts({ products: response.data.allProduct }));
                     dispatch(setCategory({ category: response.data.allCategory }));
                     dispatch(setSubCategory({ subCategory: response.data.allSubCategory }));
                     dispatch(setType({ type: response.data.allType }));
@@ -61,8 +61,8 @@ function ProductManagement() {
                                    width: "15rem",
                               });
 
-                              dispatch(setProduct({ product: response.data.productData }));
-                              console.log(products);
+                              dispatch(setProducts({ products: response.data.productData }));
+                              console.log(allProducts);
                          })
                          .catch((err) => {
                               Swal.fire({
@@ -94,7 +94,6 @@ function ProductManagement() {
                                    <TableCell align="right">SubCategory</TableCell>
                                    <TableCell align="right">Type</TableCell>
                                    <TableCell align="right">LandingCost</TableCell>
-                                   <TableCell align="right">Profit</TableCell>
                                    <TableCell align="right">Selling Price</TableCell>
                                    <TableCell align="right">Description</TableCell>
                                    <TableCell align="right">Image</TableCell>
@@ -103,7 +102,7 @@ function ProductManagement() {
                               </TableRow>
                          </TableHead>
                          <TableBody>
-                              {products?.map((obj) => (
+                              {allProducts?.map((obj) => (
                                    <TableRow key={obj.ModelNumber}>
                                         <TableCell component="th" scope="row">
                                              {obj.ProductName}
@@ -112,13 +111,8 @@ function ProductManagement() {
                                         <TableCell align="center">{obj.Category}</TableCell>
                                         <TableCell align="center">{obj.SubCategory}</TableCell>
                                         <TableCell align="center">{obj.Type}</TableCell>
-
                                         <TableCell align="center">{obj.LandingCost}</TableCell>
-
-                                        <TableCell align="center">{obj.Profit}</TableCell>
-
-                                        <TableCell align="center">{obj.Profit}</TableCell>
-
+                                        <TableCell align="center">{obj.SellingPrice}</TableCell>
                                         <TableCell align="center">{obj.Description}</TableCell>
                                         <TableCell align="center">image</TableCell>
                                         <TableCell align="center">Edit</TableCell>

@@ -1,6 +1,5 @@
 import React from "react";
-import { Layout } from "../Components";
-import { UserManagement } from "../Components";
+import { UserManagement, Layout } from "../Components";
 
 const UserHome = () => {
      return (
