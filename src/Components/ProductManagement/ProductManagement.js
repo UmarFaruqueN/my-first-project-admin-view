@@ -96,7 +96,7 @@ function ProductManagement() {
                                    <TableCell align="right">LandingCost</TableCell>
                                    <TableCell align="right">Selling Price</TableCell>
                                    <TableCell align="right">Description</TableCell>
-                                   <TableCell align="right">Image</TableCell>
+                                   <TableCell align="right">Stock</TableCell>
                                    <TableCell align="right">Edit</TableCell>
                                    <TableCell align="right">Delete</TableCell>
                               </TableRow>
@@ -114,7 +114,7 @@ function ProductManagement() {
                                         <TableCell align="center">{obj.LandingCost}</TableCell>
                                         <TableCell align="center">{obj.SellingPrice}</TableCell>
                                         <TableCell align="center">{obj.Description}</TableCell>
-                                        <TableCell align="center">image</TableCell>
+                                        <TableCell align="center">{obj.Stock}</TableCell>
                                         <TableCell align="center">Edit</TableCell>
 
                                         <TableCell align="center">
