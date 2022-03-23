@@ -4,6 +4,7 @@ import { List, ListItem, ListItemIcon, Divider, ListItemText } from "@mui/materi
 import ProductionQuantityLimitsIcon from "@mui/icons-material/ProductionQuantityLimits";
 import PersonIcon from "@mui/icons-material/Person";
 import CategoryIcon from "@mui/icons-material/Category";
+import ViewCarouselIcon from "@mui/icons-material/ViewCarousel";
 
 import { useNavigate } from "react-router-dom";
 
@@ -47,6 +48,18 @@ const LayoutList = () => {
                               <ProductionQuantityLimitsIcon color="secondary" />
                          </ListItemIcon>
                          <ListItemText>Product Management</ListItemText>
+                    </ListItem>
+                    <Divider />
+                    <ListItem
+                         button
+                         onClick={() => {
+                              navigate("/bannerManagement");
+                         }}
+                    >
+                         <ListItemIcon>
+                              <ViewCarouselIcon color="secondary" />
+                         </ListItemIcon>
+                         <ListItemText>Banner Management</ListItemText>
                     </ListItem>
                     <Divider />
                </List>

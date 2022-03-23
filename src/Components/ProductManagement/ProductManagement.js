@@ -120,7 +120,7 @@ function ProductManagement() {
                          </TableHead>
                          <TableBody>
                               {allProducts?.map((obj) => (
-                                   <TableRow key={obj.ModelNumber}>
+                                   <TableRow key={obj._id}>
                                         <TableCell sx={{ fontSize: "8px" }} component="th" scope="row">
                                              {obj.ProductName}{" "}
                                              <IconButton

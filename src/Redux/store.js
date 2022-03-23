@@ -5,6 +5,7 @@ import subCategoryReducer from "./subCategory/subCategory";
 import productReducer from "./product/product";
 import productsReducer from "./products/products";
 import typeReducer from "./type/type";
+import bannerReducer from "./banner/banner";
 
 export default configureStore({
      reducer: {
@@ -14,6 +15,7 @@ export default configureStore({
           type: typeReducer,
           product: productReducer,
           products: productsReducer,
+          banner:bannerReducer,
      
          
      },

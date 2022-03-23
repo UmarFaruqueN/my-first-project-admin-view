@@ -41,5 +41,11 @@ export const getImage = "http://localhost:4000/product/image/get";
 export const updateImage = "http://localhost:4000/product/image/update";
 export const deleteImage = "http://localhost:4000/product/image/delete";
 
+//Banner Management
+
+export const addBanner = "http://localhost:4000/banner/add";
+export const getBanner = "http://localhost:4000/banner/get";
+export const deleteBanner = "http://localhost:4000/banner/delete";
+
 
     

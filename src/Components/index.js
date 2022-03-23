@@ -9,6 +9,7 @@ export {default as Layout } from "./Layout/Layout"
 export {UserManagement} from "./UserManagment"
 export {Categories} from "./Categories"
 export {ProductManagement} from "./ProductManagement"
+export {BannerManagement} from "./BannerManagement"
 
 //components
 

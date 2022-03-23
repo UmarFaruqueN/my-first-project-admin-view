@@ -12,6 +12,7 @@ import AddProducts from "./Pages/AddProducts";
 import BackFromImage from "./Components/ProductManagement/Components/BackFromImage";
 import EditProduct from "./Components/ProductManagement/Components/EditProduct";
 import EditImage from "./Components/ProductManagement/Components/EditImage";
+import BannerHome from "./Pages/BannerHome";
 
 function App() {
      const Token = localStorage.getItem("token");
@@ -25,6 +26,7 @@ function App() {
                          {Token && <Route exact path="/userManagement" element={<UserHome />} />}
                          {Token && <Route exact path="/categoryManagement" element={<CategoryHome />} />}
                          {Token && <Route exact path="/productManagement" element={<ProductHome />} />}
+                         {Token && <Route exact path="/bannerManagement" element={<BannerHome/>} />}T
                          <Route exact path="/addProduct" element={<AddProducts />} />
                          <Route exact path="/addImage:_id" element={<AddImage />} />
                          <Route exact path="/backFromImage:_id" element={<BackFromImage />} />
