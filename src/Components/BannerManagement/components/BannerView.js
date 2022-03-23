@@ -1,4 +1,4 @@
-import { Button, Grid, IconButton } from "@mui/material";
+import { Button, Grid, IconButton, Typography } from "@mui/material";
 import React, { useState, useRef, useEffect } from "react";
 import Banner from "../../../assets/Banner.png";
 import CloseIcon from "@mui/icons-material/Close";
@@ -11,13 +11,16 @@ import Swal from "sweetalert2";
 import { setBanner, addBanner, getBanner, deleteBanner } from "../";
 
 const BannerView = (props) => {
+
+    const bannerFor = props.title;
      useEffect(() => {
-         const bannerFor =props.title;
+        console.log(bannerFor);
           axios.post(getBanner, bannerFor, { headers: { "Content-Type": "multipart/form-data" } }).then((response) => {
                console.log(response.data.allBanner);
                setBanner(response.data.allBanner)
           });
      }, []);
+     console.log(bannerFor);
      const dispatch = useDispatch();
      const [bannerData , setBannerData]=useState([])
     
@@ -50,6 +53,7 @@ const BannerView = (props) => {
                               width: "15rem",
                          });
                          dispatch(setBanner(response.data.allBanner));
+                         setBanner(response.data.allBanner)
                          SetLoader(false);
                     })
                     .catch((err) => {
@@ -69,7 +73,7 @@ const BannerView = (props) => {
      };
    
 
-     console.log("thus " + bannerData);
+     const temp=["https://res.cloudinary.com/umarfaruquen/image/upload/v1648073523/yq59b8vxuc9ugp8xjchd.png",]
      return (
           <>
                <Grid container sx={{ backgroundColor: "#ffffff", justifyContent: "space-around" }}>
@@ -90,7 +94,7 @@ const BannerView = (props) => {
                          )}
                          <input hidden ref={img1ref} name="file" type="file" onChange={onchangeImg1} />
                     </Grid>
-                    {bannerData?.map((obj) => (
+                    {bannerData?.map((obj) => 
                          <Grid item sx={{ display: "flex", flexDirection: "column" }}>
                               <Grid item sx={{ display: "flex", justifyContent: "flex-end" }}>
                                    {" "}
@@ -101,10 +105,11 @@ const BannerView = (props) => {
                               </Grid>
                               <Grid item pb={3}>
                                    {" "}
-                                   <img width="885px" height="225px" src={obj.banner} alt="" />{" "}
+                                   {/* <img width="100px" height="100px" src={obj.banner} alt="" />{" "} */}
+                                   <Typography>{obj.bannerId}</Typography>
                               </Grid>
                          </Grid>
-                    ))}
+                    )}
                </Grid>
           </>
      );

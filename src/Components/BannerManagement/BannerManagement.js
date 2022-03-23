@@ -64,13 +64,13 @@ const BannerManagement = () => {
                     </Tabs>
                </Box>
                <TabPanel value={value} index={0}>
-                    <BannerView  title={"Category"}/>
+                    <BannerView  title={"Home"}/>
                </TabPanel>
                <TabPanel value={value} index={1}>
-                    5545
+               <BannerView  title={"Category"}/>
                </TabPanel>
                <TabPanel value={value} index={2}>
-                    21212
+               <BannerView  title={"SubCategory"}/>
                </TabPanel>
           </Box>
      );
