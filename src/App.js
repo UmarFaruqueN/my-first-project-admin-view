@@ -8,8 +8,10 @@ import UserHome from "./Pages/UserHome";
 import CategoryHome from "./Pages/CategoryHome";
 import ProductHome from "./Pages/ProductHome";
 import AddImage from "./Components/ProductManagement/Components/AddImage";
-import AddProducts from "./Pages/AddProducts"
+import AddProducts from "./Pages/AddProducts";
 import BackFromImage from "./Components/ProductManagement/Components/BackFromImage";
+import EditProduct from "./Components/ProductManagement/Components/EditProduct";
+import EditImage from "./Components/ProductManagement/Components/EditImage";
 
 function App() {
      const Token = localStorage.getItem("token");
@@ -23,10 +25,11 @@ function App() {
                          {Token && <Route exact path="/userManagement" element={<UserHome />} />}
                          {Token && <Route exact path="/categoryManagement" element={<CategoryHome />} />}
                          {Token && <Route exact path="/productManagement" element={<ProductHome />} />}
-                         <Route exact path="/addProduct" element={<AddProducts/>} />
+                         <Route exact path="/addProduct" element={<AddProducts />} />
                          <Route exact path="/addImage:_id" element={<AddImage />} />
                          <Route exact path="/backFromImage:_id" element={<BackFromImage />} />
-
+                         <Route exact path="/editProduct:_id" element={<EditProduct />} />
+                         <Route exact path="/editImage:_id" element={<EditImage />} />
                     </Routes>
                </div>
           </ThemeProvider>

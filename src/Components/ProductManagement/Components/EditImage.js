@@ -1,14 +1,13 @@
 import React, { useState, useRef } from "react";
-import { Button, Dialog, Slide, Grid } from "@mui/material";
+import { Button, Slide, Grid } from "@mui/material";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { useNavigate, useParams } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 import CircularProgress from "@mui/material/CircularProgress";
 
 import { ProductAddAppBar, addImage, setProducts } from "../";
-import imageUpload from "../../../assets/imageUpload.jpg";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
      return <Slide direction="down" ref={ref} {...props} />;
@@ -23,12 +22,17 @@ const useStyles = makeStyles({
      },
      productImg: { width: "230px", height: "230px" },
 });
-const AddImage = () => {
+const EditImage = () => {
      const navigate = useNavigate();
      const dispatch = useDispatch();
      const classes = useStyles();
      const { _id } = useParams();
      console.log(_id);
+     const allProduct = useSelector((state) => state.products.value);
+
+     const productData = allProduct.filter((obj) => {
+          return obj._id == _id;
+     });
 
      const [img1State, setImg1State] = useState(null);
      const [img2State, setImg2State] = useState(null);
@@ -121,7 +125,7 @@ const AddImage = () => {
      };
 
      const handleClose = () => {
-          navigate("/backFromImage" + _id);
+          navigate("/productManagement");
      };
 
      return (
@@ -134,7 +138,7 @@ const AddImage = () => {
                               onClick={() => {
                                    changeRef(img1ref);
                               }}
-                              src={img1State?.url || imageUpload}
+                              src={img1State?.url || productData[0]?.Image1}
                          />
                          <input hidden ref={img1ref} name="file" type="file" onChange={onchangeImg1} />
                     </Grid>
@@ -144,7 +148,7 @@ const AddImage = () => {
                               onClick={() => {
                                    changeRef(img2ref);
                               }}
-                              src={img2State?.url || imageUpload}
+                              src={img2State?.url || productData[0]?.Image2}
                          />
                          <input hidden ref={img2ref} name="file" type="file" onChange={onchangeImg2} />
                     </Grid>
@@ -154,7 +158,7 @@ const AddImage = () => {
                               onClick={() => {
                                    changeRef(img3ref);
                               }}
-                              src={img3State?.url || imageUpload}
+                              src={img3State?.url || productData[0]?.Image3}
                          />
                          <input hidden ref={img3ref} name="file" type="file" onChange={onchangeImg3} />
                     </Grid>
@@ -164,7 +168,7 @@ const AddImage = () => {
                               onClick={() => {
                                    changeRef(img4ref);
                               }}
-                              src={img4State?.url || imageUpload}
+                              src={img4State?.url || productData[0]?.Image4}
                          />
                          <input hidden ref={img4ref} name="file" type="file" onChange={onchangeImg4} />
                     </Grid>
@@ -183,4 +187,4 @@ const AddImage = () => {
      );
 };
 
-export default AddImage;
+export default EditImage;

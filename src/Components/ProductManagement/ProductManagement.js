@@ -127,7 +127,7 @@ function ProductManagement() {
                                                   color="secondary"
                                                   variant="contained"
                                                   onClick={() => {
-                                                       navigate("/editProduct");
+                                                       navigate("/editProduct"+obj._id);
                                                   }}
                                              >
                                                   <EditIcon sx={{ fontSize: "16px" }} />
@@ -135,9 +135,21 @@ function ProductManagement() {
                                         </TableCell>
                                         <TableCell sx={{ fontSize: "8px" }} align="left">
                                              <Grid container>
-                                                  <Grid item>
+                                                  <Grid item md={10}>
                                                        {" "}
                                                        <img width="60px" height="40px" src={obj.Image1} />
+                                                       
+                                                  </Grid>
+                                                  <Grid item md={2}>
+                                                  <IconButton
+                                                  color="secondary"
+                                                  variant="contained"
+                                                  onClick={() => {
+                                                       navigate("/editImage"+obj._id);
+                                                  }}
+                                             >
+                                                  <EditIcon sx={{ fontSize: "16px" }} />
+                                             </IconButton>
                                                   </Grid>
                                              </Grid>
                                         </TableCell>

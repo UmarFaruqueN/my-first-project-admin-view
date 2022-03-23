@@ -1,16 +1,6 @@
 import React, { useState, useEffect } from "react";
-import {
-     Box,
-     Button,
-     Dialog,
-     Select,
-     MenuItem,
-     Slide,
-     Container,
-     DialogContentText,
-     Grid,
-     TextField,
-} from "@mui/material";
+import { Button, Select, MenuItem, Container, DialogContentText, Grid, TextField, IconButton ,CircularProgress} from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
 
 import { useForm } from "react-hook-form";
 import axios from "axios";
@@ -18,18 +8,27 @@ import { useSelector, useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { addProduct, ProductAddAppBar, setProducts, getProduct } from "..";
 
-const BackFromImage = () => {
+import { updateProduct, ProductAddAppBar, setProducts } from "..";
+
+const EditProduct = () => {
      const navigate = useNavigate();
      const dispatch = useDispatch();
-     const { _id } = useParams();
-     const [product, setProduct] = useState(null);
+     const [progress , setProgress]= useState(false)
+     const [edit, setEdit] = useState(false);
      const [category, setCategory] = useState(null);
      const [subCategory, setSubCategory] = useState(null);
+     const allProduct = useSelector((state) => state.products.value);
      const allCategory = useSelector((state) => state.category.value);
      const allSubCategory = useSelector((state) => state.subCategory.value);
      const allType = useSelector((state) => state.type.value);
+
+     const { _id } = useParams();
+     const productData = allProduct.filter((obj) => {
+          return obj._id == _id;
+     });
+     console.log(_id);
+     console.log(productData);
 
      const {
           register,
@@ -39,37 +38,37 @@ const BackFromImage = () => {
           mode: "onTouched",
           reValidateMode: "onChange",
           defaultValues: {
-               ProductName: product?.ProductName,
-               ModelNumber: product?.ModelNumber,
-               Category: product?.Category,
-               SubCategory: product?.SubCategory,
-               Type: product?.Type,
-               Stock: product?.Stock,
-               LandingCost: product?.LandingCost,
-               SellingPrice: product?.SellingPrice,
-               Description: product?.Description,
-               CategoryOffer: 0,
-               SubCategoryOffer: 0,
-               TypeOffer: 0,
-               ProductOffer: 0,
-               CouponOffer: 0,
-               Customers: [],
-               Image1: "",
-               Image1id: "",
-               Image2: "",
-               Image2id: "",
-               Image3: "",
-               Image3id: "",
-               Image4: "",
-               Image4id: "",
-               rating: [],
+               ProductName: productData[0]?.ProductName,
+               ModelNumber: productData[0]?.ModelNumber,
+               Category: productData[0]?.Category,
+               SubCategory: productData[0]?.SubCategory,
+               Type: productData[0]?.Type,
+               Stock: productData[0]?.Stock,
+               LandingCost: productData[0]?.LandingCost,
+               SellingPrice: productData[0]?.SellingPrice,
+               Description: productData[0]?.Description,
+               CategoryOffer: productData[0]?.CategoryOffer,
+               SubCategoryOffer: productData[0]?.SubCategoryOffer,
+               TypeOffer: productData[0]?.TypeOffer,
+               ProductOffer: productData[0]?.ProductOffer,
+               CouponOffer: productData[0]?.CouponOffer,
+               Customers: productData[0]?.Customers,
+               Image1: productData[0]?.Image1,
+               Image1id: productData[0]?.Image1id,
+               Image2: productData[0]?.Image2,
+               Image2id: productData[0]?.Image2id,
+               Image3: productData[0]?.Image3,
+               Image3id: productData[0]?.Image3id,
+               Image4: productData[0]?.Image4,
+               Image4id: productData[0]?.Image4id,
+               rating: productData[0]?.rating,
           },
      });
 
      // Submiting form data
 
      const Submit = handleSubmit((data) => {
-          axios.post(addProduct, data, { headers: { "Content-Type": "application/json" } })
+          axios.post(updateProduct, data, { headers: { "Content-Type": "application/json" } })
                .then((response) => {
                     dispatch(setProducts({ products: response.data.allProduct }));
 
@@ -107,15 +106,6 @@ const BackFromImage = () => {
      const handleChange = (event) => {
           setCategory(event.target.value);
      };
-     useEffect(() => {
-          axios.post(getProduct, _id, { headers: { "Content-Type": "application/json" } }).
-               then((response) => {
-                    console.log(response.data.oneProduct);
-                    setProduct(response.data.oneProduct);
-               }).catch((err) => {
-                    console.log(err);
-               });
-     }, []);
 
      useEffect(() => {
           const filterData = allSubCategory.filter((obj) => obj.category == category);
@@ -171,22 +161,36 @@ const BackFromImage = () => {
                               <DialogContentText variant="h3" color="text.hint">
                                    Category
                               </DialogContentText>
-                              <Select
-                                   label="Category"
-                                   color="secondary"
-                                   margin="normal"
-                                   fullWidth
-                                   id="Category"
-                                   name="Category"
-                                   {...register("Category", {
-                                        required: "Category Required",
-                                   })}
-                                   onChange={handleChange}
-                              >
-                                   {allCategory?.map((obj) => (
-                                        <MenuItem value={obj.category}>{obj.category}</MenuItem>
-                                   ))}
-                              </Select>
+                              {edit ? (
+                                   <Select
+                                        label="Category"
+                                        color="secondary"
+                                        margin="normal"
+                                        fullWidth
+                                        id="Category"
+                                        name="Category"
+                                        {...register("Category", {
+                                             required: "Category Required",
+                                        })}
+                                        onChange={handleChange}
+                                   >
+                                        {allCategory?.map((obj) => (
+                                             <MenuItem value={obj.category}>{obj.category}</MenuItem>
+                                        ))}
+                                   </Select>
+                              ) : (
+                                   <DialogContentText sx={{ pt: 2 }} variant="h3" color="text">
+                                        {productData[0].Category}
+                                        <IconButton
+                                             color="secondary"
+                                             onClick={() => {
+                                                  setEdit(true);
+                                             }}
+                                        >
+                                             <EditIcon sx={{ fontSize: "16px" }} />
+                                        </IconButton>
+                                   </DialogContentText>
+                              )}
 
                               <DialogContentText color="error">{errors.Category?.message}</DialogContentText>
                          </Grid>
@@ -196,21 +200,35 @@ const BackFromImage = () => {
                                    Sub Category
                               </DialogContentText>
 
-                              <Select
-                                   label="SubCategory"
-                                   color="secondary"
-                                   margin="normal"
-                                   fullWidth
-                                   id="SubCategory"
-                                   name="SubCategory"
-                                   {...register("SubCategory", {
-                                        required: "SubCategory Required",
-                                   })}
-                              >
-                                   {subCategory?.map((obj) => (
-                                        <MenuItem value={obj.subCategory}>{obj.subCategory}</MenuItem>
-                                   ))}
-                              </Select>
+                              {edit ? (
+                                   <Select
+                                        label="SubCategory"
+                                        color="secondary"
+                                        margin="normal"
+                                        fullWidth
+                                        id="SubCategory"
+                                        name="SubCategory"
+                                        {...register("SubCategory", {
+                                             required: "SubCategory Required",
+                                        })}
+                                   >
+                                        {subCategory?.map((obj) => (
+                                             <MenuItem value={obj.subCategory}>{obj.subCategory}</MenuItem>
+                                        ))}
+                                   </Select>
+                              ) : (
+                                   <DialogContentText sx={{ pt: 2 }} variant="h3" color="text">
+                                        {productData[0].Category}
+                                        <IconButton
+                                             color="secondary"
+                                             onClick={() => {
+                                                  setEdit(true);
+                                             }}
+                                        >
+                                             <EditIcon sx={{ fontSize: "16px" }} />
+                                        </IconButton>
+                                   </DialogContentText>
+                              )}
 
                               <DialogContentText color="error">{errors.SubCategory?.message}</DialogContentText>
                          </Grid>
@@ -220,23 +238,37 @@ const BackFromImage = () => {
                                    Type
                               </DialogContentText>
 
-                              <Select
-                                   label="Type"
-                                   color="secondary"
-                                   margin="normal"
-                                   fullWidth
-                                   id="Type"
-                                   name="Type"
-                                   {...register("Type", {
-                                        required: "Type Required",
-                                   })}
-                              >
-                                   {allType?.map((obj) => (
-                                        <MenuItem key={obj._id} value={obj.type}>
-                                             {obj.type}
-                                        </MenuItem>
-                                   ))}
-                              </Select>
+                              {edit ? (
+                                   <Select
+                                        label="Type"
+                                        color="secondary"
+                                        margin="normal"
+                                        fullWidth
+                                        id="Type"
+                                        name="Type"
+                                        {...register("Type", {
+                                             required: "Type Required",
+                                        })}
+                                   >
+                                        {allType?.map((obj) => (
+                                             <MenuItem key={obj._id} value={obj.type}>
+                                                  {obj.type}
+                                             </MenuItem>
+                                        ))}
+                                   </Select>
+                              ) : (
+                                   <DialogContentText sx={{ pt: 2 }} variant="h3" color="text">
+                                        {productData[0].Category}
+                                        <IconButton
+                                             color="secondary"
+                                             onClick={() => {
+                                                  setEdit(true);
+                                             }}
+                                        >
+                                             <EditIcon sx={{ fontSize: "16px" }} />
+                                        </IconButton>
+                                   </DialogContentText>
+                              )}
 
                               <DialogContentText color="error">{errors.Type?.message}</DialogContentText>
                          </Grid>
@@ -327,9 +359,10 @@ const BackFromImage = () => {
                          </Grid>
                          <Grid display="flex" flexDirection="row-reverse" justifyContent="flex-start" item xs={7}>
                               {" "}
+                              {progress?<CircularProgress/>:
                               <Button color="secondary" variant="contained" onClick={Submit}>
-                                   NEXT
-                              </Button>
+                                   Update Product
+                              </Button>}
                          </Grid>
                     </Grid>
                </Container>
@@ -337,4 +370,4 @@ const BackFromImage = () => {
      );
 };
 
-export default BackFromImage;
+export default EditProduct;
