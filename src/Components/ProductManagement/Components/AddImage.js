@@ -1,8 +1,9 @@
 import React, { useState, useRef } from "react";
 import { Button, Dialog, Slide, Grid } from "@mui/material";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { makeStyles } from "@mui/styles";
 
@@ -21,13 +22,14 @@ const useStyles = makeStyles({
      },
      productImg: { width: "230px", height: "230px" },
 });
-const AddImage = (props) => {
+const AddImage = () => {
+     const navigate = useNavigate()
      const dispatch = useDispatch();
      const classes = useStyles();
+     const { _id } = useParams();
+     console.log(_id);
 
-     const productInfo = useSelector((state) => state.product.value);
-
-     const dummy = "https://picsum.photos/id/870/200/300?grayscale&blur=2";
+     const dummy = "https://www.google.com/imgres?imgurl=https%3A%2F%2Fvegibit.com%2Fwp-content%2Fuploads%2F2018%2F02%2FVueJS-Image-Upload.png&imgrefurl=https%3A%2F%2Fvegibit.com%2Fvuejs-image-upload%2F&tbnid=M5CV2BBDLTWaPM&vet=12ahUKEwjlg-X65tb2AhU2RWwGHUZ4C-oQMygDegUIARC-AQ..i&docid=NkmX9Io3w__pdM&w=400&h=300&q=upload%20image%20pic%20dummy&ved=2ahUKEwjlg-X65tb2AhU2RWwGHUZ4C-oQMygDegUIARC-AQ";
      const [img1State, setImg1State] = useState(null);
      const [img2State, setImg2State] = useState(null);
      const [img3State, setImg3State] = useState(null);
@@ -45,7 +47,7 @@ const AddImage = (props) => {
           formData.append("img", img2State.img);
           formData.append("img", img3State.img);
           formData.append("img", img4State.img);
-          formData.append("data", JSON.stringify(productInfo));
+          formData.append("data", JSON.stringify(_id));
 
           axios.post(addImage, formData, { headers: { "Content-Type": "multipart/form-data" } })
                .then((response) => {
@@ -58,6 +60,7 @@ const AddImage = (props) => {
                          timer: 1500,
                          width: "15rem",
                     });
+                    navigate('/productManagement')
                })
                .catch((err) => {
                     console.log(err);
@@ -115,12 +118,15 @@ const AddImage = (props) => {
           }
      };
 
-     //form validation
+
+     const handleClose = () => {
+          navigate(-1);
+     };
 
      return (
           <div>
-               <Dialog open={props.open} onClose={props.close} TransitionComponent={Transition}>
-                    <ProductAddAppBar Close={props.close} title={"Add Image"} />
+               
+                    <ProductAddAppBar Close={handleClose} title={"Add Image"} />
                     <Grid pt={3} container rowSpacing={2} columnSpacing={2}>
                          <Grid className={classes.productImgGrid} item xs={6}>
                               <img
@@ -168,7 +174,7 @@ const AddImage = (props) => {
                               </Button>
                          </Grid>
                     </Grid>
-               </Dialog>
+               
           </div>
      );
 };

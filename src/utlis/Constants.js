@@ -29,7 +29,9 @@ export const deleteType = "http://localhost:4000/type/delete";
 
 //Product Management
 export const addProduct = "http://localhost:4000/product/add";
-export const getProduct = "http://localhost:4000/product/get";
+export const getProduct = "http://localhost:4000/product/get"; 
+export const getAllProducts = "http://localhost:4000/product/getAll";
+
 export const updateProduct = "http://localhost:4000/product/update";
 export const deleteProduct = "http://localhost:4000/product/delete";
 

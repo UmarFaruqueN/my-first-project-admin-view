@@ -1,19 +1,23 @@
 import React, { useEffect } from "react";
 
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material";
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, Grid } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Box } from "@mui/system";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
+import AddIcon from "@mui/icons-material/Add";
+import EditIcon from "@mui/icons-material/Edit";
 
-import { AddProduct, getProduct, deleteProduct, setProducts, setCategory, setSubCategory, setType } from "./";
+import { getAllProducts, deleteProduct, setProducts, setCategory, setSubCategory, setType } from "./";
 
 function ProductManagement() {
      const dispatch = useDispatch();
+     const navigate = useNavigate();
      const allProducts = useSelector((state) => state.products.value);
      useEffect(() => {
-          axios.get(getProduct, { headers: { "Content-Type": "application/json" } })
+          axios.get(getAllProducts, { headers: { "Content-Type": "application/json" } })
                .then((response) => {
                     console.log("success");
                     console.log(response.data.allProduct);
@@ -26,18 +30,6 @@ function ProductManagement() {
                     console.log(error);
                });
      }, []);
-
-     // useEffect(() => {
-     //      axios.get(getProduct, { headers: { "Content-Type": "application/json" } })
-     //           .then((response) => {
-     //                console.log("success");
-     //                console.log(response.data.allProduct);
-     //                dispatch(setProduct({ product: response.data.allProduct }));
-     //           })
-     //           .catch((error) => {
-     //                console.log(error);
-     //           });
-     // }, [products]);
 
      const DeleteProduct = (productData) => {
           Swal.fire({
@@ -81,41 +73,95 @@ function ProductManagement() {
 
      return (
           <>
-               <Box sx={{ display: "flex", justifyContent: "space-around", paddingBottom: "10px" }}>
-                    <AddProduct />
-               </Box>
-               <TableContainer component={Paper}>
-                    <Table sx={{ minWidth: 650 }} aria-label="caption table">
+               <TableContainer width="100%" component={Paper}>
+                    <Table width="100%" aria-label="caption table">
                          <TableHead>
                               <TableRow>
-                                   <TableCell>Product Name</TableCell>
-                                   <TableCell align="right">Model Number</TableCell>
-                                   <TableCell align="right">Category</TableCell>
-                                   <TableCell align="right">SubCategory</TableCell>
-                                   <TableCell align="right">Type</TableCell>
-                                   <TableCell align="right">LandingCost</TableCell>
-                                   <TableCell align="right">Selling Price</TableCell>
-                                   <TableCell align="right">Description</TableCell>
-                                   <TableCell align="right">Stock</TableCell>
-                                   <TableCell align="right">Edit</TableCell>
-                                   <TableCell align="right">Delete</TableCell>
+                                   <TableCell sx={{ display: "flex", alignItems: "center", fontSize: "10px" }}>
+                                        Product Name{" "}
+                                        <IconButton
+                                             color="secondary"
+                                             variant="contained"
+                                             onClick={() => {
+                                                  navigate("/addProduct");
+                                             }}
+                                        >
+                                             <AddIcon />
+                                        </IconButton>
+                                   </TableCell>
+                                   <TableCell sx={{ fontSize: "10px" }} align="left">
+                                        Images
+                                   </TableCell>
+                                   <TableCell sx={{ fontSize: "10px" }} align="left">
+                                        Model Number
+                                   </TableCell>
+                                   <TableCell sx={{ fontSize: "10px" }} align="left">
+                                        Category
+                                   </TableCell>
+                                   <TableCell sx={{ fontSize: "10px" }} align="left">
+                                        SubCategory
+                                   </TableCell>
+                                   <TableCell sx={{ fontSize: "10px" }} align="left">
+                                        Type
+                                   </TableCell>
+                                   <TableCell sx={{ fontSize: "10px" }} align="left">
+                                        Price
+                                   </TableCell>
+                                   <TableCell sx={{ fontSize: "10px" }} align="left">
+                                        Description
+                                   </TableCell>
+                                   <TableCell sx={{ fontSize: "10px" }} align="left">
+                                        Stock
+                                   </TableCell>
+                                   <TableCell sx={{ fontSize: "10px" }} align="left">
+                                        Delete
+                                   </TableCell>
                               </TableRow>
                          </TableHead>
                          <TableBody>
                               {allProducts?.map((obj) => (
                                    <TableRow key={obj.ModelNumber}>
-                                        <TableCell component="th" scope="row">
-                                             {obj.ProductName}
+                                        <TableCell sx={{ fontSize: "8px" }} component="th" scope="row">
+                                             {obj.ProductName}{" "}
+                                             <IconButton
+                                                  color="secondary"
+                                                  variant="contained"
+                                                  onClick={() => {
+                                                       navigate("/editProduct");
+                                                  }}
+                                             >
+                                                  <EditIcon sx={{ fontSize: "16px" }} />
+                                             </IconButton>
                                         </TableCell>
-                                        <TableCell align="right">{obj.ModelNumber}</TableCell>
-                                        <TableCell align="center">{obj.Category}</TableCell>
-                                        <TableCell align="center">{obj.SubCategory}</TableCell>
-                                        <TableCell align="center">{obj.Type}</TableCell>
-                                        <TableCell align="center">{obj.LandingCost}</TableCell>
-                                        <TableCell align="center">{obj.SellingPrice}</TableCell>
-                                        <TableCell align="center">{obj.Description}</TableCell>
-                                        <TableCell align="center">{obj.Stock}</TableCell>
-                                        <TableCell align="center">Edit</TableCell>
+                                        <TableCell sx={{ fontSize: "8px" }} align="left">
+                                             <Grid container>
+                                                  <Grid item>
+                                                       {" "}
+                                                       <img width="60px" height="40px" src={obj.Image1} />
+                                                  </Grid>
+                                             </Grid>
+                                        </TableCell>
+                                        <TableCell sx={{ fontSize: "8px" }} align="left">
+                                             {obj.ModelNumber}
+                                        </TableCell>
+                                        <TableCell sx={{ fontSize: "8px" }} align="left">
+                                             {obj.Category}
+                                        </TableCell>
+                                        <TableCell sx={{ fontSize: "8px" }} align="left">
+                                             {obj.SubCategory}
+                                        </TableCell>
+                                        <TableCell sx={{ fontSize: "8px" }} align="left">
+                                             {obj.Type}
+                                        </TableCell>
+                                        <TableCell sx={{ fontSize: "8px" }} align="left">
+                                             {obj.SellingPrice}
+                                        </TableCell>
+                                        <TableCell sx={{ fontSize: "8px" }} align="left">
+                                             {obj.Description}
+                                        </TableCell>
+                                        <TableCell sx={{ fontSize: "8px" }} align="left">
+                                             {obj.Stock}
+                                        </TableCell>
 
                                         <TableCell align="center">
                                              {" "}

@@ -1,6 +1,6 @@
 //main components
 export { default as ProductManagement } from "./ProductManagement";
-export { default as AddProduct } from "./Components/AddProduct";
+export { default as ProductAddForm } from "./Components/ProductAddForm";
 export { default as AddImage } from "./Components/AddImage";
 export { default as ProductAddAppBar } from "./Components/ProductAddAppBar";
 
@@ -8,6 +8,7 @@ export { default as ProductAddAppBar } from "./Components/ProductAddAppBar";
 export {
      addProduct,
      getProduct,
+     getAllProducts,
      updateProduct,
      deleteProduct,
      addImage,
