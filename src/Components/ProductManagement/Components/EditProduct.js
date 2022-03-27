@@ -1,5 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Button, Select, MenuItem, Container, DialogContentText, Grid, TextField, IconButton ,CircularProgress} from "@mui/material";
+import {
+     Button,
+     Select,
+     MenuItem,
+     Container,
+     DialogContentText,
+     Grid,
+     TextField,
+     IconButton,
+     CircularProgress,
+} from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 
 import { useForm } from "react-hook-form";
@@ -8,13 +18,12 @@ import { useSelector, useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 import { useNavigate, useParams } from "react-router-dom";
 
-
 import { updateProduct, ProductAddAppBar, setProducts } from "..";
 
 const EditProduct = () => {
      const navigate = useNavigate();
      const dispatch = useDispatch();
-     const [progress , setProgress]= useState(false)
+     const [progress, setProgress] = useState(false);
      const [edit, setEdit] = useState(false);
      const [category, setCategory] = useState(null);
      const [subCategory, setSubCategory] = useState(null);
@@ -359,10 +368,13 @@ const EditProduct = () => {
                          </Grid>
                          <Grid display="flex" flexDirection="row-reverse" justifyContent="flex-start" item xs={7}>
                               {" "}
-                              {progress?<CircularProgress/>:
-                              <Button color="secondary" variant="contained" onClick={Submit}>
-                                   Update Product
-                              </Button>}
+                              {progress ? (
+                                   <CircularProgress />
+                              ) : (
+                                   <Button color="secondary" variant="contained" onClick={Submit}>
+                                        Update Product
+                                   </Button>
+                              )}
                          </Grid>
                     </Grid>
                </Container>
