@@ -10,6 +10,7 @@ export {UserManagement} from "./UserManagment"
 export {Categories} from "./Categories"
 export {ProductManagement} from "./ProductManagement"
 export {BannerManagement} from "./BannerManagement"
+export {OrderManagement} from "./OrderManagement"
 
 //components
 

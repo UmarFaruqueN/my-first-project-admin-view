@@ -5,6 +5,7 @@ import ProductionQuantityLimitsIcon from "@mui/icons-material/ProductionQuantity
 import PersonIcon from "@mui/icons-material/Person";
 import CategoryIcon from "@mui/icons-material/Category";
 import ViewCarouselIcon from "@mui/icons-material/ViewCarousel";
+import InventoryIcon from '@mui/icons-material/Inventory';
 
 import { useNavigate } from "react-router-dom";
 
@@ -60,6 +61,19 @@ const LayoutList = () => {
                               <ViewCarouselIcon color="secondary" />
                          </ListItemIcon>
                          <ListItemText>Banner Management</ListItemText>
+                    </ListItem>
+                    <Divider />
+                    <ListItem
+                         button
+                         onClick={() => {
+                              navigate("/orderManagement");
+                         }}
+                    >
+                         <ListItemIcon>
+                              <InventoryIcon color="secondary"/>
+                    
+                         </ListItemIcon>
+                         <ListItemText>Order Management</ListItemText>
                     </ListItem>
                     <Divider />
                </List>
