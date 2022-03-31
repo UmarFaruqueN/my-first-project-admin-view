@@ -39,6 +39,9 @@ const EditUser = (props) => {
 
      const Submit = handleSubmit((data) => {
           console.log(data);
+          const _id =props.data._id
+          data={...data,_id}
+          console.log(data);
           axios.post(updateUser, data, { headers: { "Content-Type": "application/json" } })
                .then((response) => {
                     console.log(response);

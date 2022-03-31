@@ -98,7 +98,7 @@ const CategoryManagement = () => {
                          </TableHead>
                          <TableBody>
                               {category?.map((obj) => (
-                                   <TableRow key={obj.categoryCode}>
+                                   <TableRow key={obj._id}>
                                         <TableCell component="th" scope="row">
                                              {obj.category}
                                         </TableCell>
