@@ -62,13 +62,13 @@ const StatusUpdation = (props) => {
                {progress ? <CircularProgress size={20} color="secondary" /> : ""}
                {options ? (
                     <Select color="secondary" margin="normal" size="small" fullWidth id="status" name="status">
-                         <MenuItem onClick={() => handleChange("Shipped")} value="Shipped">
+                         <MenuItem onClick={() => handleChange("Item Shipped")} value="Shipped">
                               Item Shipped
                          </MenuItem>
-                         <MenuItem onClick={() => handleChange("Delivered")} value="Delivered">
+                         <MenuItem onClick={() => handleChange("Item Delivered")} value="Delivered">
                               Item Delivered
                          </MenuItem>
-                         <MenuItem onClick={() => handleChange("Canceled")} value="Canceled">
+                         <MenuItem onClick={() => handleChange("Canceled by Store")} value="Canceled">
                               Item Canceled
                          </MenuItem>
                     </Select>
@@ -78,7 +78,7 @@ const StatusUpdation = (props) => {
 
                {btn ? (
                     <>
-                         {props.data.orderStatus == "User Ordered" ? (
+                         {props.data.orderStatus === "User Ordered" ? (
                               <Button onClick={Open} size="small" color="secondary">
                                    {" "}
                                    User Ordered
@@ -87,24 +87,24 @@ const StatusUpdation = (props) => {
                               ""
                          )}
 
-                         {props.data.orderStatus == "Item Canceled" ? (
+                         {props.data.orderStatus === "Canceled by Store" ? (
                               <Button onClick={Open} size="small" color="error">
                                    {" "}
-                                   Item Canceled
+                                  Item Canceled 
                               </Button>
                          ) : (
                               ""
                          )}
 
-                         {props.data.orderStatus == "Item Shipped" ? (
-                              <Button onClick={Open} size="small" color="warning">
+                         {props.data.orderStatus === "Item Shipped" ? (
+                              <Button onClick={Open} size="small" color="secondary">
                                    {" "}
                                    Item Shipped
                               </Button>
                          ) : (
                               ""
                          )}
-                         {props.data.orderStatus == "Item Delivered" ? (
+                         {props.data.orderStatus === "Item Delivered" ? (
                               <Button onClick={Open} size="small" color="success">
                                    {" "}
                                    Item Delivered
@@ -113,7 +113,7 @@ const StatusUpdation = (props) => {
                               ""
                          )}
 
-                         {props.data.orderStatus == "User Cancelled" ? (
+                         {props.data.orderStatus === "User Cancelled" ? (
                               <Button size="small" color="error" disabled>
                                    {" "}
                                    User Cancelled
