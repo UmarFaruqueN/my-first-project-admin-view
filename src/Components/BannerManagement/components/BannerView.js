@@ -8,22 +8,23 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 import Swal from "sweetalert2";
 
-import { setBanner, addBanner, getBanner, deleteBanner } from "../";
+import {addBanner, getBanner, deleteBanner } from "../";
+
 
 const BannerView = (props) => {
-
-    const bannerFor = props.title;
+     const [banners, setBanners] = useState([]);
+     const bannerFor = props.title;
      useEffect(() => {
-        console.log(bannerFor);
-          axios.post(getBanner, bannerFor, { headers: { "Content-Type": "multipart/form-data" } }).then((response) => {
-               console.log(response.data.allBanner);
-               setBanner(response.data.allBanner)
-          });
+          console.log(bannerFor);
+
+          axios.post(getBanner, { bannerFor: bannerFor }, { headers: { "Content-Type": "application/json" } }).then(
+               (response) => {
+                    console.log(response.data.allBanner);
+                    setBanners(response.data.allBanner);
+               }
+          );
      }, []);
      console.log(bannerFor);
-     const dispatch = useDispatch();
-     const [bannerData , setBannerData]=useState([])
-    
 
      const [loader, SetLoader] = useState(false);
      const img1ref = useRef(null);
@@ -44,6 +45,12 @@ const BannerView = (props) => {
 
                axios.post(addBanner, formData, { headers: { "Content-Type": "multipart/form-data" } })
                     .then((response) => {
+                         axios.post(getBanner, bannerFor, { headers: { "Content-Type": "application/json" } }).then(
+                              (response) => {
+                                   console.log(response.data.allBanner);
+                                   setBanners(response.data.allBanner);
+                              }
+                         );
                          Swal.fire({
                               position: "bottom-end",
                               icon: "success",
@@ -52,8 +59,7 @@ const BannerView = (props) => {
                               timer: 1500,
                               width: "15rem",
                          });
-                         dispatch(setBanner(response.data.allBanner));
-                         setBanner(response.data.allBanner)
+
                          SetLoader(false);
                     })
                     .catch((err) => {
@@ -71,9 +77,34 @@ const BannerView = (props) => {
                     });
           }
      };
-   
 
-     const temp=["https://res.cloudinary.com/umarfaruquen/image/upload/v1648073523/yq59b8vxuc9ugp8xjchd.png",]
+     const DeleteBanner = (data) => {
+          console.log(data);
+          axios.post(deleteBanner, data, { headers: { "Content-Type": "application/json" } })
+               .then((response) => {
+                    Swal.fire({
+                         position: "bottom-end",
+                         icon: "success",
+                         text: response.data.message,
+                         showConfirmButton: false,
+                         timer: 1500,
+                         width: "15rem",
+                    });
+               })
+               .catch((err) => {
+                    console.log(err);
+                    Swal.fire({
+                         position: "bottom-end",
+                         icon: "error",
+                         text: err.response.data.message,
+                         showConfirmButton: false,
+                         timer: 1500,
+                         width: "15rem",
+                    });
+                    console.log(err.response.data.message);
+               });
+     };
+
      return (
           <>
                <Grid container sx={{ backgroundColor: "#ffffff", justifyContent: "space-around" }}>
@@ -94,22 +125,22 @@ const BannerView = (props) => {
                          )}
                          <input hidden ref={img1ref} name="file" type="file" onChange={onchangeImg1} />
                     </Grid>
-                    {bannerData?.map((obj) => 
-                         <Grid item sx={{ display: "flex", flexDirection: "column" }}>
-                              <Grid item sx={{ display: "flex", justifyContent: "flex-end" }}>
-                                   {" "}
-                                   <IconButton color="error">
-                                        {" "}
-                                        <CloseIcon />
-                                   </IconButton>{" "}
+               </Grid>
+
+               <Grid container mt={2} spacing={3}>
+                    {banners.map((obj) => (
+                         <Grid item md={12} ml={1} sx={{ display: "flex" }}>
+                              <Grid item mt={3}>
+                                   <img src={obj.banner} alt="banner" width="100%" height="250"></img>
                               </Grid>
-                              <Grid item pb={3}>
+                              <Grid item>
                                    {" "}
-                                   {/* <img width="100px" height="100px" src={obj.banner} alt="" />{" "} */}
-                                   <Typography>{obj.bannerId}</Typography>
+                                   <IconButton onClick={() => DeleteBanner(obj)}>
+                                        <CloseIcon color="error" />
+                                   </IconButton>
                               </Grid>
                          </Grid>
-                    )}
+                    ))}
                </Grid>
           </>
      );

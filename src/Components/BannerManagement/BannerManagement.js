@@ -64,7 +64,7 @@ const BannerManagement = () => {
                     </Tabs>
                </Box>
                <TabPanel value={value} index={0}>
-                    <BannerView  title={"Home"}/>
+                    <BannerView  title={'Home'}/>
                </TabPanel>
                <TabPanel value={value} index={1}>
                <BannerView  title={"Category"}/>
