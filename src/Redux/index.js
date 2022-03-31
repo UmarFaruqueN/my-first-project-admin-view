@@ -6,5 +6,5 @@ export { setType } from "./type/type";
 export {setProduct} from "./product/product";
 export {setProducts} from "./products/products";
 export {setBanner} from "./banner/banner";
-
+export {setOrders} from "./orders/orders"
 

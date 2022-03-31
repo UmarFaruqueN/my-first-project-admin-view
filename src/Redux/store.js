@@ -6,6 +6,8 @@ import productReducer from "./product/product";
 import productsReducer from "./products/products";
 import typeReducer from "./type/type";
 import bannerReducer from "./banner/banner";
+import ordersReducer from "./orders/orders";
+
 
 export default configureStore({
      reducer: {
@@ -16,6 +18,7 @@ export default configureStore({
           product: productReducer,
           products: productsReducer,
           banner:bannerReducer,
+          orders:ordersReducer,
      
          
      },

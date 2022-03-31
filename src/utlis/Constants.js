@@ -47,5 +47,10 @@ export const addBanner = "http://localhost:4000/banner/add";
 export const getBanner = "http://localhost:4000/banner/get";
 export const deleteBanner = "http://localhost:4000/banner/delete";
 
+//Order Management
+export const getAllOrder = "http://localhost:4000/admin/getAllOrder";
+export const updateOrder = "http://localhost:4000/admin/updateOrder";
+
+
 
     

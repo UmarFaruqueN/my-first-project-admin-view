@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, Grid } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Box } from "@mui/system";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -11,6 +10,7 @@ import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 
 import { getAllProducts, deleteProduct, setProducts, setCategory, setSubCategory, setType } from "./";
+import { setOrders } from "../../Redux";
 
 function ProductManagement() {
      const dispatch = useDispatch();
@@ -25,6 +25,7 @@ function ProductManagement() {
                     dispatch(setCategory({ category: response.data.allCategory }));
                     dispatch(setSubCategory({ subCategory: response.data.allSubCategory }));
                     dispatch(setType({ type: response.data.allType }));
+                    dispatch(setOrders({orders:response.data.allOrders}))
                })
                .catch((error) => {
                     console.log(error);
