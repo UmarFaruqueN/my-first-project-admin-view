@@ -79,7 +79,7 @@ const StatusUpdation = (props) => {
                {btn ? (
                     <>
                          {props.data.orderStatus === "User Ordered" ? (
-                              <Button onClick={Open} size="small" color="secondary">
+                              <Button onClick={Open} size="small" color="warning">
                                    {" "}
                                    User Ordered
                               </Button>
@@ -90,7 +90,7 @@ const StatusUpdation = (props) => {
                          {props.data.orderStatus === "Canceled by Store" ? (
                               <Button onClick={Open} size="small" color="error">
                                    {" "}
-                                  Item Canceled 
+                                   Item Canceled
                               </Button>
                          ) : (
                               ""

@@ -12,6 +12,7 @@ const FilterAndPrint = (props) => {
     }
     const Clear=()=>{
         props.FilterByMonth("")
+        props.setData(false)
         setShow(false)
     }
      return (

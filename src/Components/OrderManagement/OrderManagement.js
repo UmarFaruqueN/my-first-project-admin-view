@@ -34,7 +34,7 @@ const OrderManagement = () => {
 
      return (
           <>
-               <FilterAndPrint FilterByMonth={FilterByMonth} />
+               <FilterAndPrint setData={setData} FilterByMonth={FilterByMonth} />
                <OrderTable data={data ? data : allOrders} />
           </>
      );
