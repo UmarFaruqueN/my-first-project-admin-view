@@ -33,7 +33,7 @@ const EditProduct = () => {
      const allType = useSelector((state) => state.type.value);
 
      const { _id } = useParams();
-     const productData = allProduct.filter((obj) => {
+     const productData = allProduct?.filter((obj) => {
           return obj._id == _id;
      });
      console.log(_id);
@@ -47,6 +47,7 @@ const EditProduct = () => {
           mode: "onTouched",
           reValidateMode: "onChange",
           defaultValues: {
+               _id: productData[0]?._id,
                ProductName: productData[0]?.ProductName,
                ModelNumber: productData[0]?.ModelNumber,
                Category: productData[0]?.Category,
@@ -79,8 +80,7 @@ const EditProduct = () => {
      const Submit = handleSubmit((data) => {
           axios.post(updateProduct, data, { headers: { "Content-Type": "application/json" } })
                .then((response) => {
-                    dispatch(setProducts({ products: response.data.allProduct }));
-
+                    dispatch(setProducts({ products: response.data.allProduct }))
                     Swal.fire({
                          position: "bottom-end",
                          icon: "success",
@@ -89,7 +89,7 @@ const EditProduct = () => {
                          timer: 1500,
                          width: "15rem",
                     });
-                    navigate("/addImage" + response.data.newProduct._id);
+                    navigate("/productManagement");
                })
                .catch((err) => {
                     console.log(err);
@@ -189,7 +189,7 @@ const EditProduct = () => {
                                    </Select>
                               ) : (
                                    <DialogContentText sx={{ pt: 2 }} variant="h3" color="text">
-                                        {productData[0].Category}
+                                        {productData[0]?.Category}
                                         <IconButton
                                              color="secondary"
                                              onClick={() => {
@@ -227,7 +227,7 @@ const EditProduct = () => {
                                    </Select>
                               ) : (
                                    <DialogContentText sx={{ pt: 2 }} variant="h3" color="text">
-                                        {productData[0].Category}
+                                        {productData[0]?.SubCategory}
                                         <IconButton
                                              color="secondary"
                                              onClick={() => {
@@ -267,7 +267,7 @@ const EditProduct = () => {
                                    </Select>
                               ) : (
                                    <DialogContentText sx={{ pt: 2 }} variant="h3" color="text">
-                                        {productData[0].Category}
+                                        {productData[0]?.Type}
                                         <IconButton
                                              color="secondary"
                                              onClick={() => {
