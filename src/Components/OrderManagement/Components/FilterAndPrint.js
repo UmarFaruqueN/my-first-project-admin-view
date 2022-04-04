@@ -4,6 +4,10 @@ import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import { Button, Grid, IconButton, Typography } from "@mui/material";
 import MonthButton from "./components/MonthButton";
 
+
+
+
+
 const FilterAndPrint = (props) => {
     const [show , setShow]=useState(false)
 
@@ -57,7 +61,7 @@ const FilterAndPrint = (props) => {
 
                          <Grid item sx={{ display: "flex" }}>
                               <Grid item>
-                                   <IconButton>
+                                   <IconButton onClick={props.DownloadPdf}>
                                         <PictureAsPdfIcon color="secondary" />
                                    </IconButton>
                               </Grid>

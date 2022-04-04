@@ -6,6 +6,9 @@ import PersonIcon from "@mui/icons-material/Person";
 import CategoryIcon from "@mui/icons-material/Category";
 import ViewCarouselIcon from "@mui/icons-material/ViewCarousel";
 import InventoryIcon from '@mui/icons-material/Inventory';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
 import { useNavigate } from "react-router-dom";
 
@@ -13,7 +16,18 @@ const LayoutList = () => {
      const navigate = useNavigate();
      return (
           <>
-               <List>
+               <List><ListItem
+                         button
+                         onClick={() => {
+                              navigate("/dashboard");
+                         }}
+                    >
+                         <ListItemIcon>
+                              <DashboardIcon color="secondary"/>
+                         </ListItemIcon>
+                         <ListItemText>Dashboard</ListItemText>
+                    </ListItem>
+                    <Divider />
                     <ListItem
                          button
                          onClick={() => {
@@ -51,6 +65,19 @@ const LayoutList = () => {
                          <ListItemText>Product Management</ListItemText>
                     </ListItem>
                     <Divider />
+
+                    <ListItem
+                         button
+                         onClick={() => {
+                              navigate("/offerManagement");
+                         }}
+                    >
+                         <ListItemIcon>
+                              <LocalOfferIcon color="secondary" />
+                         </ListItemIcon>
+                         <ListItemText>Offer Management</ListItemText>
+                    </ListItem>
+                    <Divider />
                     <ListItem
                          button
                          onClick={() => {
@@ -74,6 +101,19 @@ const LayoutList = () => {
                     
                          </ListItemIcon>
                          <ListItemText>Order Management</ListItemText>
+                    </ListItem>
+                    <Divider />
+                    <ListItem
+                         button
+                         onClick={() => {
+                              navigate("/salesReport");
+                         }}
+                    >
+                         <ListItemIcon>
+                              <AttachMoneyIcon color="secondary"/>
+                    
+                         </ListItemIcon>
+                         <ListItemText>Sales Report</ListItemText>
                     </ListItem>
                     <Divider />
                </List>

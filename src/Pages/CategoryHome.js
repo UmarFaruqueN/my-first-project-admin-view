@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { Categories, Layout } from "../Components";
 
 const CategoryHome = () => {
+     const navigate = useNavigate();
+     useEffect(() => {
+          const Token = localStorage.getItem("token");
+          if (!Token) {
+               navigate("/");
+          }
+     }, []);
      return (
           <Layout>
                <Categories />

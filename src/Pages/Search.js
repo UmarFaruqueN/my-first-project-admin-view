@@ -1,9 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { Layout, ProductManagement } from "../Components";
-
-const ProductHome = () => {
+function Search() {
      const navigate = useNavigate();
      useEffect(() => {
           const Token = localStorage.getItem("token");
@@ -11,11 +9,7 @@ const ProductHome = () => {
                navigate("/");
           }
      }, []);
-     return (
-          <Layout>
-               <ProductManagement />
-          </Layout>
-     );
-};
+     return <div>Search</div>;
+}
 
-export default ProductHome;
+export default Search;

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
-
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 
 import { setOrders } from "../../Redux";
 import { getAllOrder } from "./index";
@@ -32,9 +33,28 @@ const OrderManagement = () => {
           console.log(data);
      };
 
+     const columns = [
+          { title: "name", field: "name" },
+          { title: "phone", field: "phone" },
+          { title: "order id", field: "_id" },
+          { title: "amount", field: "total", type: "numeric" },
+          
+     ];
+
+     const  DownloadPdf = () => {
+          console.log(allOrders);
+          const doc = new jsPDF();
+          doc.text("Order Report", 20, 10);
+          doc.autoTable({
+               columns: columns.map((col) => ({ ...col, datakey: col.field })),
+               body:allOrders,
+          });
+
+          doc.save("report.pdf");
+     };
      return (
           <>
-               <FilterAndPrint setData={setData} FilterByMonth={FilterByMonth} />
+               <FilterAndPrint DownloadPdf={DownloadPdf} data={data} setData={setData} FilterByMonth={FilterByMonth} />
                <OrderTable data={data ? data : allOrders} />
           </>
      );

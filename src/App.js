@@ -14,26 +14,37 @@ import EditProduct from "./Components/ProductManagement/Components/EditProduct";
 import EditImage from "./Components/ProductManagement/Components/EditImage";
 import BannerHome from "./Pages/BannerHome";
 import OrderHome from "./Pages/OrderHome";
+import DashBoard from "./Pages/Dashboard"
+import SalesReport from "./Pages/SalesReport";
+import OfferManagement from "./Pages/OfferManagement";
 
 function App() {
-     const Token = localStorage.getItem("token");
-     useEffect(() => {}, []);
-
      return (
           <ThemeProvider theme={customTheme}>
                <div className="App">
                     <Routes>
                          <Route exact path="/" element={<Login />} />
-                         {Token && <Route exact path="/userManagement" element={<UserHome />} />}
-                         {Token && <Route exact path="/categoryManagement" element={<CategoryHome />} />}
-                         {Token && <Route exact path="/productManagement" element={<ProductHome />} />}
-                         {Token && <Route exact path="/bannerManagement" element={<BannerHome/>} />}
+                         <Route exact path="/dashboard" element={<DashBoard />} />
+                         <Route exact path="/userManagement" element={<UserHome />} />
+                         <Route exact path="/categoryManagement" element={<CategoryHome />} />
+                         <Route exact path="/productManagement" element={<ProductHome />} />
+                         <Route exact path="/offerManagement" element={<OfferManagement />} />
+                         <Route exact path="/bannerManagement" element={<BannerHome />} />
                          <Route exact path="/orderManagement" element={<OrderHome />} />
+                         <Route exact path="/salesReport" element={<SalesReport />} />
                          <Route exact path="/addProduct" element={<AddProducts />} />
                          <Route exact path="/addImage:_id" element={<AddImage />} />
                          <Route exact path="/backFromImage:_id" element={<BackFromImage />} />
                          <Route exact path="/editProduct:_id" element={<EditProduct />} />
                          <Route exact path="/editImage:_id" element={<EditImage />} />
+                         <Route
+                              path="*"
+                              element={
+                                   <main style={{ padding: "1rem" }}>
+                                        <p>404 Page Note Found</p>
+                                   </main>
+                              }
+                         />
                     </Routes>
                </div>
           </ThemeProvider>

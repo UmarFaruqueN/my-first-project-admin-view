@@ -51,6 +51,8 @@ export const deleteBanner = "http://localhost:4000/banner/delete";
 export const getAllOrder = "http://localhost:4000/admin/getAllOrder";
 export const updateOrder = "http://localhost:4000/admin/updateOrder";
 
+//Offer Management
+export const addOffer = "http://localhost:4000/admin/addOffer"
 
 
     
