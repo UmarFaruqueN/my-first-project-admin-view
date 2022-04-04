@@ -6,24 +6,58 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { IconButton } from "@mui/material";
 import { Delete } from "@mui/icons-material";
-
-function createData(name, calories, fat, carbs, protein) {
-     return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-     createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-     createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-     createData("Eclair", 262, 16.0, 24, 6.0),
-     createData("Cupcake", 305, 3.7, 67, 4.3),
-     createData("Gingerbread", 356, 16.0, 49, 3.9),
-];
+import { deleOffer } from "../../../utlis/Constants";
+import { setOffers } from "../../../Redux";
+import Swal from "sweetalert2";
+import axios from "axios";
 
 const CouponView = () => {
+     const dispatch = useDispatch();
+
      const offerData = useSelector((state) => state.offers.value);
+
+     const DeleteThis = (data) => {
+          Swal.fire({
+               title: "Are you sure?",
+               text: "You won't be able to revert this!",
+               icon: "warning",
+               showCancelButton: true,
+               confirmButtonColor: "#3085d6",
+               cancelButtonColor: "#d33",
+               confirmButtonText: "Yes, delete it!",
+          }).then((result) => {
+               if (result.isConfirmed) {
+                    axios.post(deleOffer, data, { headers: { "Content-Type": "application/json" } })
+                         .then((response) => {
+                              Swal.fire({
+                                   position: "bottom-end",
+                                   icon: "success",
+                                   title: response.data.message,
+                                   showConfirmButton: false,
+                                   timer: 1500,
+                                   width: "15rem",
+                              });
+
+                              dispatch(setOffers({ offers: response.data.allOffer }));
+                         })
+                         .catch((err) => {
+                              Swal.fire({
+                                   position: "bottom-end",
+                                   icon: "error",
+                                   title: err.response.data.message,
+                                   showConfirmButton: false,
+                                   timer: 1500,
+                                   width: "15rem",
+                              });
+                              console.log(err.response.data.message);
+                         });
+               }
+          });
+     };
+
      return (
           <TableContainer component={Paper}>
                <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -35,7 +69,6 @@ const CouponView = () => {
                               <TableCell align="left">Code</TableCell>
                               <TableCell align="left">Expire On</TableCell>
                               <TableCell align="left"></TableCell>
-
                          </TableRow>
                     </TableHead>
                     <TableBody>
@@ -47,9 +80,13 @@ const CouponView = () => {
                                    <TableCell align="left">{obj.type === "Coupon Code" ? obj._id : "N/A"}</TableCell>
                                    <TableCell align="left">{"N/A"}</TableCell>
                                    <TableCell align="left">
-                                       <IconButton>
-                                           <Delete color="error"/>
-                                       </IconButton>
+                                        <IconButton
+                                             onClick={() => {
+                                                  DeleteThis(obj);
+                                             }}
+                                        >
+                                             <Delete color="error" />
+                                        </IconButton>
                                    </TableCell>
                               </TableRow>
                          ))}

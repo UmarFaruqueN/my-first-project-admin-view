@@ -53,6 +53,7 @@ export const updateOrder = "http://localhost:4000/admin/updateOrder";
 
 //Offer Management
 export const addOffer = "http://localhost:4000/admin/addOffer"
+export const deleOffer = "http://localhost:4000/admin/deleOffer"
 
 
     
