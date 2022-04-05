@@ -80,6 +80,7 @@ const EditProduct = () => {
      const Submit = handleSubmit((data) => {
           axios.post(updateProduct, data, { headers: { "Content-Type": "application/json" } })
                .then((response) => {
+                    navigate("/");
                     dispatch(setProducts({ products: response.data.allProduct }))
                     Swal.fire({
                          position: "bottom-end",
@@ -89,9 +90,10 @@ const EditProduct = () => {
                          timer: 1500,
                          width: "15rem",
                     });
-                    navigate("/productManagement");
+                    
                })
                .catch((err) => {
+                    navigate("/");
                     console.log(err);
                     console.log("ENTHO ERRORE UND");
                     Swal.fire({

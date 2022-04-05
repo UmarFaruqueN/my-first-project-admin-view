@@ -56,6 +56,7 @@ const EditImage = () => {
           SetLoader(true);
           axios.post(addImage, formData, { headers: { "Content-Type": "multipart/form-data" } })
                .then((response) => {
+                    navigate("/");
                     Swal.fire({
                          position: "bottom-end",
                          icon: "success",
@@ -65,7 +66,7 @@ const EditImage = () => {
                          width: "15rem",
                     });
                     dispatch(setProducts(response.data.allProduct));
-                    navigate("/productManagement");
+                  
                })
                .catch((err) => {
                     console.log(err);
