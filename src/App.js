@@ -14,9 +14,9 @@ import EditProduct from "./Components/ProductManagement/Components/EditProduct";
 import EditImage from "./Components/ProductManagement/Components/EditImage";
 import BannerHome from "./Pages/BannerHome";
 import OrderHome from "./Pages/OrderHome";
-import DashBoard from "./Pages/Dashboard"
-import SalesReport from "./Pages/SalesReport";
+import DashBoard from "./Pages/Dashboard";
 import OfferManagement from "./Pages/OfferManagement";
+import ErrorPage from "./Pages/ErrorPage";
 
 function App() {
      return (
@@ -31,7 +31,6 @@ function App() {
                          <Route exact path="/offerManagement" element={<OfferManagement />} />
                          <Route exact path="/bannerManagement" element={<BannerHome />} />
                          <Route exact path="/orderManagement" element={<OrderHome />} />
-                         <Route exact path="/salesReport" element={<SalesReport />} />
                          <Route exact path="/addProduct" element={<AddProducts />} />
                          <Route exact path="/addImage:_id" element={<AddImage />} />
                          <Route exact path="/backFromImage:_id" element={<BackFromImage />} />
@@ -40,9 +39,7 @@ function App() {
                          <Route
                               path="*"
                               element={
-                                   <main style={{ padding: "1rem" }}>
-                                        <p>404 Page Note Found</p>
-                                   </main>
+                                  <ErrorPage/>
                               }
                          />
                     </Routes>
