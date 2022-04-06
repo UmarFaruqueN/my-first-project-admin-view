@@ -64,6 +64,7 @@ const CouponView = () => {
                     <TableHead>
                          <TableRow>
                               <TableCell align="left">Type</TableCell>
+                              <TableCell align="left">Head</TableCell>
                               <TableCell align="left">Offer</TableCell>
                               <TableCell align="left">Minimum Purchase</TableCell>
                               <TableCell align="left">Code</TableCell>
@@ -74,11 +75,12 @@ const CouponView = () => {
                     <TableBody>
                          {offerData.map((obj) => (
                               <TableRow key={obj._id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+                                  <TableCell align="left">{obj.title}</TableCell>
                                    <TableCell align="left">{obj.type}</TableCell>
                                    <TableCell align="left">{obj.offerAmount}</TableCell>
                                    <TableCell align="left">{obj.minimumPurchase}</TableCell>
                                    <TableCell align="left">{obj.type === "Coupon Code" ? obj._id : "N/A"}</TableCell>
-                                   <TableCell align="left">{"N/A"}</TableCell>
+                                   <TableCell align="left">{obj.type === "Coupon Code" ? obj.expireAt: "N/A"}</TableCell>
                                    <TableCell align="left">
                                         <IconButton
                                              onClick={() => {

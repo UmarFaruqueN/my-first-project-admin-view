@@ -17,8 +17,10 @@ const StatusUpdation = (props) => {
      const handleChange = (obj) => {
           setOptions(false);
           setProgress(true);
+          const tempDate =new Date()
+          const updateDate = tempDate.toLocaleString();
           const _id = props.data._id;
-          const data = { _id: _id, status: obj };
+          const data = { _id: _id, status: obj,updateDate:updateDate };
 
           console.log(data);
           axios.post(updateOrder, data, { headers: { "Content-Type": "application/json" } })

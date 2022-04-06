@@ -72,6 +72,8 @@ const EditProduct = () => {
                Image4: productData[0]?.Image4,
                Image4id: productData[0]?.Image4id,
                rating: productData[0]?.rating,
+               Offer: productData[0]?.Offer,
+               OfferType: productData[0]?.OfferType,
           },
      });
 
@@ -81,7 +83,7 @@ const EditProduct = () => {
           axios.post(updateProduct, data, { headers: { "Content-Type": "application/json" } })
                .then((response) => {
                     navigate("/");
-                    dispatch(setProducts({ products: response.data.allProduct }))
+                    dispatch(setProducts({ products: response.data.allProduct }));
                     Swal.fire({
                          position: "bottom-end",
                          icon: "success",
@@ -90,7 +92,6 @@ const EditProduct = () => {
                          timer: 1500,
                          width: "15rem",
                     });
-                    
                })
                .catch((err) => {
                     navigate("/");

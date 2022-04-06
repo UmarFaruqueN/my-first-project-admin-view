@@ -1,5 +1,5 @@
 import { Grid, Select, Typography, MenuItem, TextField, Button } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { addOffer } from "../../../utlis/Constants";
 import { setOffers } from "../../../Redux";
@@ -8,6 +8,8 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 const AddNormalOffer = (props) => {
+     const [err, setErr] = useState(null);
+     const [err1, setErr1] = useState(null);
      const dispatch = useDispatch();
      const {
           register,
@@ -16,9 +18,14 @@ const AddNormalOffer = (props) => {
      } = useForm({
           mode: "onTouched",
           reValidateMode: "onChange",
+          defaultValues: {
+               title: props.title,
+          },
      });
 
      const Submit = handleSubmit((data) => {
+          setErr(null);
+          setErr1(null);
           console.log(data);
           axios.post(addOffer, data, { headers: { "Content-Type": "application/json" } })
                .then((response) => {
@@ -36,14 +43,11 @@ const AddNormalOffer = (props) => {
                .catch((err) => {
                     console.log(err);
                     console.log("ENTHO ERRORE UND");
-                    Swal.fire({
-                         position: "bottom-end",
-                         icon: "error",
-                         text: err?.response?.data?.message,
-                         showConfirmButton: false,
-                         timer: 1500,
-                         width: "15rem",
-                    });
+                    if (err?.response?.data?.maxPrice) {
+                         setErr1(err?.response?.data?.message + err?.response?.data?.maxPrice);
+                    } else {
+                         setErr(err?.response?.data?.message);
+                    }
                     console.log(err?.response?.data?.message);
                });
      });
@@ -101,6 +105,7 @@ const AddNormalOffer = (props) => {
                               />
                               <Typography color="error" variant="h5">
                                    {" "}
+                                   {err1}
                                    {errors.offerAmount?.message}
                               </Typography>
                          </Grid>
@@ -125,6 +130,7 @@ const AddNormalOffer = (props) => {
                               <Typography color="error" variant="h5">
                                    {" "}
                                    {errors.minimumPurchase?.message}
+                                   {err}
                               </Typography>
                          </Grid>
                     </Grid>

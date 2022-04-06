@@ -47,7 +47,7 @@ const OrderManagement = () => {
           doc.text("Order Report", 20, 10);
           doc.autoTable({
                columns: columns.map((col) => ({ ...col, datakey: col.field })),
-               body:allOrders,
+               body:data?data:allOrders,
           });
 
           doc.save("report.pdf");

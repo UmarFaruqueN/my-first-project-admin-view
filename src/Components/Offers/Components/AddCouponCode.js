@@ -18,6 +18,7 @@ const AddCouponCode = (props) => {
           reValidateMode: "onChange",
           defaultValues: {
                type: "Coupon Code",
+               title:"Coupon Code"
           },
      });
 

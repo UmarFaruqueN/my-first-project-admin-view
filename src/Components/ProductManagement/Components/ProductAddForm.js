@@ -54,6 +54,8 @@ const ProductAddForm = () => {
                Image4: "",
                Image4id: "",
                rating: [],
+               Offer: 0,
+               OfferType: "",
           },
      });
 
