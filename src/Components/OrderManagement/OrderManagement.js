@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
-
+import {utils,writeFileXLSX,write} from 'xlsx'
 import { setOrders } from "../../Redux";
 import { getAllOrder } from "./index";
 import OrderTable from "./Components/OrderTable";
@@ -44,7 +44,7 @@ const OrderManagement = () => {
      const  DownloadPdf = () => {
           console.log(allOrders);
           const doc = new jsPDF();
-          doc.text("Order Report", 20, 10);
+          doc.text("Order Report", )
           doc.autoTable({
                columns: columns.map((col) => ({ ...col, datakey: col.field })),
                body:data?data:allOrders,
@@ -52,9 +52,22 @@ const OrderManagement = () => {
 
           doc.save("report.pdf");
      };
+
+     const DownloadExcel =()=>{
+     const worksheet = utils.json_to_sheet(data?data:allOrders)
+     const workbook=  utils.book_new()
+     utils.book_append_sheet(workbook,worksheet,"report")
+
+     let buf= write(workbook,{bookType:"xlsx",type:"buffer"} )
+     write(workbook,{bookType:"xlsx",type:"binary"})
+     writeFileXLSX(workbook,"report.xlsx")
+
+     }
+
+
      return (
           <>
-               <FilterAndPrint DownloadPdf={DownloadPdf} data={data} setData={setData} FilterByMonth={FilterByMonth} />
+               <FilterAndPrint DownloadExcel={DownloadExcel} DownloadPdf={DownloadPdf} data={data} setData={setData} FilterByMonth={FilterByMonth} />
                <OrderTable data={data ? data : allOrders} />
           </>
      );

@@ -29,6 +29,7 @@
     "recharts": "^2.1.9",
     "sweetalert2": "^11.4.4",
     "web-vitals": "^2.1.4",
+    "xlsx": "^0.18.5",
     "yup": "^0.32.11"
   },
   "scripts": {

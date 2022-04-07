@@ -45,12 +45,12 @@ const FilterAndPrint = (props) => {
                                         Monthly
                                    </Button>
                               </Grid>
-                              <Grid item>
+                              {/* <Grid item>
                                    {" "}
                                    <Button color="secondary" size="small">
                                         Weekly
                                    </Button>
-                              </Grid>
+                              </Grid> */}
                             {show?  <Grid item>
                                    {" "}
                                    <Button onClick={Clear} color="error" size="small">
@@ -66,7 +66,7 @@ const FilterAndPrint = (props) => {
                                    </IconButton>
                               </Grid>
                               <Grid item>
-                                   <IconButton>
+                                   <IconButton onClick={props.DownloadExcel}>
                                         {" "}
                                         <CloudDownloadIcon color="secondary" />
                                    </IconButton>
