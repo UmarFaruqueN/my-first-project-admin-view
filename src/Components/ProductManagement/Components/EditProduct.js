@@ -34,7 +34,7 @@ const EditProduct = () => {
 
      const { _id } = useParams();
      const productData = allProduct?.filter((obj) => {
-          return obj._id == _id;
+          return obj._id === _id;
      });
      console.log(_id);
      console.log(productData);
@@ -92,9 +92,10 @@ const EditProduct = () => {
                          timer: 1500,
                          width: "15rem",
                     });
+                    setProgress(false);
                })
                .catch((err) => {
-                    navigate("/");
+                    setProgress(false);
                     console.log(err);
                     console.log("ENTHO ERRORE UND");
                     Swal.fire({
@@ -120,7 +121,7 @@ const EditProduct = () => {
      };
 
      useEffect(() => {
-          const filterData = allSubCategory.filter((obj) => obj.category == category);
+          const filterData = allSubCategory.filter((obj) => obj.category === category);
           setSubCategory(filterData);
      }, [category]);
 

@@ -31,7 +31,7 @@ const EditImage = () => {
      const allProduct = useSelector((state) => state.products.value);
 
      const productData = allProduct.filter((obj) => {
-          return obj._id == _id;
+          return obj._id === _id;
      });
 
      const [img1State, setImg1State] = useState(null);
@@ -140,7 +140,7 @@ const EditImage = () => {
                                    changeRef(img1ref);
                               }}
                               src={img1State?.url || productData[0]?.Image1}
-                         />
+                       alt="editImage1"  />
                          <input hidden ref={img1ref} name="file" type="file" onChange={onchangeImg1} />
                     </Grid>
                     <Grid className={classes.productImgGrid} item xs={6}>
@@ -150,7 +150,7 @@ const EditImage = () => {
                                    changeRef(img2ref);
                               }}
                               src={img2State?.url || productData[0]?.Image2}
-                         />
+                              alt="editImage2"   />
                          <input hidden ref={img2ref} name="file" type="file" onChange={onchangeImg2} />
                     </Grid>
                     <Grid className={classes.productImgGrid} item xs={6}>
@@ -160,7 +160,7 @@ const EditImage = () => {
                                    changeRef(img3ref);
                               }}
                               src={img3State?.url || productData[0]?.Image3}
-                         />
+                              alt="editImage3"   />
                          <input hidden ref={img3ref} name="file" type="file" onChange={onchangeImg3} />
                     </Grid>
                     <Grid className={classes.productImgGrid} item xs={6}>
@@ -170,7 +170,7 @@ const EditImage = () => {
                                    changeRef(img4ref);
                               }}
                               src={img4State?.url || productData[0]?.Image4}
-                         />
+                              alt="editImage4"      />
                          <input hidden ref={img4ref} name="file" type="file" onChange={onchangeImg4} />
                     </Grid>
 

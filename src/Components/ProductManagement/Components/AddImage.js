@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { Button, Dialog, Slide, Grid } from "@mui/material";
+import { Button, Slide, Grid } from "@mui/material";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
@@ -10,9 +10,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { ProductAddAppBar, addImage, setProducts } from "../";
 import imageUpload from "../../../assets/imageUpload.jpg";
 
-const Transition = React.forwardRef(function Transition(props, ref) {
-     return <Slide direction="down" ref={ref} {...props} />;
-});
+
 
 const useStyles = makeStyles({
      productImgGrid: {
@@ -135,7 +133,7 @@ const AddImage = () => {
                                    changeRef(img1ref);
                               }}
                               src={img1State?.url || imageUpload}
-                         />
+                         alt="image1" />
                          <input hidden ref={img1ref} name="file" type="file" onChange={onchangeImg1} />
                     </Grid>
                     <Grid className={classes.productImgGrid} item xs={6}>
@@ -145,7 +143,7 @@ const AddImage = () => {
                                    changeRef(img2ref);
                               }}
                               src={img2State?.url || imageUpload}
-                         />
+                              alt="image2"   />
                          <input hidden ref={img2ref} name="file" type="file" onChange={onchangeImg2} />
                     </Grid>
                     <Grid className={classes.productImgGrid} item xs={6}>
@@ -155,7 +153,7 @@ const AddImage = () => {
                                    changeRef(img3ref);
                               }}
                               src={img3State?.url || imageUpload}
-                         />
+                              alt="image3"   />
                          <input hidden ref={img3ref} name="file" type="file" onChange={onchangeImg3} />
                     </Grid>
                     <Grid className={classes.productImgGrid} item xs={6}>
@@ -165,7 +163,7 @@ const AddImage = () => {
                                    changeRef(img4ref);
                               }}
                               src={img4State?.url || imageUpload}
-                         />
+                              alt="image4"  />
                          <input hidden ref={img4ref} name="file" type="file" onChange={onchangeImg4} />
                     </Grid>
 

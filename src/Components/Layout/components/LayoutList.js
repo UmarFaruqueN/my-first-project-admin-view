@@ -8,7 +8,6 @@ import ViewCarouselIcon from "@mui/icons-material/ViewCarousel";
 import InventoryIcon from "@mui/icons-material/Inventory";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
-import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 
 import { useNavigate } from "react-router-dom";
 

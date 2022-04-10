@@ -46,27 +46,26 @@ const UserManagement = () => {
                               const userStatus = response.data.userStatus;
 
                               dispatch(setUserData({ userData: response.data.userData }));
-                              {
-                                   userStatus?.active
-                                        ? Swal.fire({
-                                               position: "bottom-end",
-                                               icon: "error",
-                                               title: "Blocked",
-                                               showConfirmButton: false,
-                                               timer: 1500,
-                                               height: "5rem",
-                                               width: "15rem",
-                                          })
-                                        : Swal.fire({
-                                               position: "bottom-end",
-                                               icon: "success",
-                                               title: "UnBlocked",
-                                               showConfirmButton: false,
-                                               timer: 1500,
-                                               height: "5rem",
-                                               width: "15rem",
-                                          });
-                              }
+
+                              userStatus?.active
+                                   ? Swal.fire({
+                                          position: "bottom-end",
+                                          icon: "error",
+                                          title: "Blocked",
+                                          showConfirmButton: false,
+                                          timer: 1500,
+                                          height: "5rem",
+                                          width: "15rem",
+                                     })
+                                   : Swal.fire({
+                                          position: "bottom-end",
+                                          icon: "success",
+                                          title: "UnBlocked",
+                                          showConfirmButton: false,
+                                          timer: 1500,
+                                          height: "5rem",
+                                          width: "15rem",
+                                     });
                          })
                          .catch((err) => {
                               Swal.fire({

@@ -12,12 +12,6 @@ const SubCategoryManagement = () => {
      const dispatch = useDispatch();
      const subCategory = useSelector((state) => state.subCategory.value);
 
-     const {
-          register,
-          formState: { errors },
-          handleSubmit,
-     } = useForm();
-
      useEffect(() => {
           axios.get(getSubCategory, { headers: { "Content-Type": "application/json" } })
                .then((response) => {

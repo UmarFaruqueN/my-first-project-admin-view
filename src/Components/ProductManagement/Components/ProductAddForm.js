@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
 import {
-     Box,
      Button,
-     Dialog,
      Select,
      MenuItem,
-     Slide,
      Container,
      DialogContentText,
      Grid,
@@ -104,7 +101,7 @@ const ProductAddForm = () => {
      };
 
      useEffect(() => {
-          const filterData = allSubCategory.filter((obj) => obj.category == category);
+          const filterData = allSubCategory.filter((obj) => obj.category === category);
           setSubCategory(filterData);
      }, [category]);
 

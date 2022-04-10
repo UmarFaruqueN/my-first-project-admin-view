@@ -30,7 +30,7 @@ function ProductManagement() {
                .catch((error) => {
                     console.log(error);
                });
-     }, []);
+     }, [dispatch]);
 
      const DeleteProduct = (productData) => {
           Swal.fire({
@@ -138,7 +138,7 @@ function ProductManagement() {
                                              <Grid container>
                                                   <Grid item md={10}>
                                                        {" "}
-                                                       <img width="60px" height="40px" src={obj.Image1} />
+                                                       <img width="60px" height="40px" src={obj.Image1} alt="productimg" />
                                                        
                                                   </Grid>
                                                   <Grid item md={2}>
