@@ -47,11 +47,11 @@ const LoginForm = () => {
                          title: response.data.message,
                          showConfirmButton: false,
                          timer: 1500,
-                         width:"15rem"
+                         width: "15rem",
                     });
 
                     localStorage.setItem("token", response.data.token);
-                    navigate("/userManagement");
+                    navigate("/dashboard");
                     setTimeout(() => {
                          window.location.reload();
                     }, 1500);
