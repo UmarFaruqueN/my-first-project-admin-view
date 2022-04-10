@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { Box, Table, TableBody, TableCell, TableHead, TableRow, Paper, TableContainer } from "@mui/material";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { useForm } from "react-hook-form";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Swal from "sweetalert2";
 
@@ -23,7 +22,7 @@ const SubCategoryManagement = () => {
                     console.log(err.response.data.message);
                     alert(err.response.data.message);
                });
-     }, []);
+     }, [dispatch, subCategory]);
 
      const DeleteCategory = (catData) => {
           Swal.fire({

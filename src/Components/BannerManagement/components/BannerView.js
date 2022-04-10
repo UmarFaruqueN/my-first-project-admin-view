@@ -1,11 +1,8 @@
-import { Button, Grid, IconButton, Typography } from "@mui/material";
+import { Button, Grid, IconButton} from "@mui/material";
 import React, { useState, useRef, useEffect } from "react";
-import Banner from "../../../assets/Banner.png";
 import CloseIcon from "@mui/icons-material/Close";
 import axios from "axios";
-import { useSelector, useDispatch } from "react-redux";
 import CircularProgress from "@mui/material/CircularProgress";
-
 import Swal from "sweetalert2";
 
 import {addBanner, getBanner, deleteBanner } from "../";
@@ -23,7 +20,7 @@ const BannerView = (props) => {
                     setBanners(response.data.allBanner);
                }
           );
-     }, []);
+     }, [bannerFor]);
      console.log(bannerFor);
 
      const [loader, SetLoader] = useState(false);
@@ -38,7 +35,7 @@ const BannerView = (props) => {
           if (e.target.files.length > 0) {
                SetLoader(true);
                const img = e.target.files[0];
-               const url = URL.createObjectURL(img);
+               // const url = URL.createObjectURL(img);
                let formData = new FormData();
                formData.append("img", img);
                formData.append("data", JSON.stringify(props.title));

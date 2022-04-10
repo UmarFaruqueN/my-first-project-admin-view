@@ -30,7 +30,7 @@ const AddOffer = () => {
                .catch((error) => {
                     console.log(error);
                });
-     }, []);
+     }, [dispatch]);
 
      const Add = () => {
           setAdd(true);

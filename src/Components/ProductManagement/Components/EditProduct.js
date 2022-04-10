@@ -123,7 +123,7 @@ const EditProduct = () => {
      useEffect(() => {
           const filterData = allSubCategory.filter((obj) => obj.category === category);
           setSubCategory(filterData);
-     }, [category]);
+     }, [category,allSubCategory]);
 
      return (
           <div>

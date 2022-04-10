@@ -58,7 +58,7 @@ const OrderManagement = () => {
      const workbook=  utils.book_new()
      utils.book_append_sheet(workbook,worksheet,"report")
 
-     let buf= write(workbook,{bookType:"xlsx",type:"buffer"} )
+     // let buf= write(workbook,{bookType:"xlsx",type:"buffer"} )
      write(workbook,{bookType:"xlsx",type:"binary"})
      writeFileXLSX(workbook,"report.xlsx")
 

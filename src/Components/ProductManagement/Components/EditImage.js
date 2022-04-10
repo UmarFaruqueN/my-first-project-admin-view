@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { Button, Slide, Grid } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
@@ -9,9 +9,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 import { ProductAddAppBar, addImage, setProducts } from "../";
 
-const Transition = React.forwardRef(function Transition(props, ref) {
-     return <Slide direction="down" ref={ref} {...props} />;
-});
+
 
 const useStyles = makeStyles({
      productImgGrid: {

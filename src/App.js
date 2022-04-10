@@ -1,22 +1,24 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { ThemeProvider } from "@mui/material";
 import { customTheme } from "./utlis/Theme";
 import { Routes, Route } from "react-router-dom";
 
-import Login from "./Pages/Login";
-import UserHome from "./Pages/UserHome";
-import CategoryHome from "./Pages/CategoryHome";
-import ProductHome from "./Pages/ProductHome";
-import AddImage from "./Components/ProductManagement/Components/AddImage";
-import AddProducts from "./Pages/AddProducts";
+import {
+     Login,
+     UserHome,
+     CategoryHome,
+     ProductHome,
+     AddProducts,
+     BannerHome,
+     OrderHome,
+     DashBoard,
+     OfferManagement,
+     ErrorPage,
+} from "./Pages/index "
+import { AddImage } from "./Components/ProductManagement";
 import BackFromImage from "./Components/ProductManagement/Components/BackFromImage";
-import EditProduct from "./Components/ProductManagement/Components/EditProduct";
-import EditImage from "./Components/ProductManagement/Components/EditImage";
-import BannerHome from "./Pages/BannerHome";
-import OrderHome from "./Pages/OrderHome";
-import DashBoard from "./Pages/Dashboard";
-import OfferManagement from "./Pages/OfferManagement";
-import ErrorPage from "./Pages/ErrorPage";
+import EditProduct  from "./Components/ProductManagement/Components/EditProduct";
+import EditImage  from "./Components/ProductManagement/Components/EditImage";
 
 function App() {
      return (
@@ -36,12 +38,7 @@ function App() {
                          <Route exact path="/backFromImage:_id" element={<BackFromImage />} />
                          <Route exact path="/editProduct:_id" element={<EditProduct />} />
                          <Route exact path="/editImage:_id" element={<EditImage />} />
-                         <Route
-                              path="*"
-                              element={
-                                  <ErrorPage/>
-                              }
-                         />
+                         <Route path="*" element={<ErrorPage />} />
                     </Routes>
                </div>
           </ThemeProvider>

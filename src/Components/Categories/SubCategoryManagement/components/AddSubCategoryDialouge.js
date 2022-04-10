@@ -87,7 +87,7 @@ const AddSubCategoryDialouge = () => {
                     console.log(err.response.data.message);
                     alert(err.response.data.message);
                });
-     }, []);
+     }, [dispatch,category]);
 
      return (
           <div>

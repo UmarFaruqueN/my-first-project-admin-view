@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
 import {
-     Box,
      Button,
-     Dialog,
      Select,
      MenuItem,
-     Slide,
      Container,
      DialogContentText,
      Grid,
@@ -108,19 +105,19 @@ const BackFromImage = () => {
           setCategory(event.target.value);
      };
      useEffect(() => {
-          axios.post(getProduct, _id, { headers: { "Content-Type": "application/json" } }).
-               then((response) => {
+          axios.post(getProduct, _id, { headers: { "Content-Type": "application/json" } })
+               .then((response) => {
                     console.log(response.data.oneProduct);
                     setProduct(response.data.oneProduct);
                }).catch((err) => {
                     console.log(err);
                });
-     }, []);
+     }, [_id]);
 
      useEffect(() => {
-          const filterData = allSubCategory.filter((obj) => obj.category == category);
+          const filterData = allSubCategory.filter((obj) => obj.category === category);
           setSubCategory(filterData);
-     }, [category]);
+     }, [category,allSubCategory]);
 
      return (
           <div>

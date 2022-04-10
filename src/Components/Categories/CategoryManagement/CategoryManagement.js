@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { Box, Table, TableBody, TableCell, TableHead, TableRow, Paper, TableContainer } from "@mui/material";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { useForm } from "react-hook-form";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Swal from "sweetalert2";
 
@@ -12,11 +11,7 @@ const CategoryManagement = () => {
      const dispatch = useDispatch();
      const category = useSelector((state) => state.category.value);
 
-     const {
-          register,
-          formState: { errors },
-          handleSubmit,
-     } = useForm();
+
 
      useEffect(() => {
           axios.get(getCategory, { headers: { "Content-Type": "application/json" } })
@@ -29,7 +24,7 @@ const CategoryManagement = () => {
                     console.log(err.response.data.message);
                     alert(err.response.data.message);
                });
-     }, []);
+     }, [dispatch,category]);
 
      const DeleteCategory = (catData) => {
           Swal.fire({
