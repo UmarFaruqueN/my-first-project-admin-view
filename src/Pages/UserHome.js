@@ -9,7 +9,7 @@ const UserHome = () => {
           if (!Token) {
                navigate("/");
           }
-     }, []);
+     }, [navigate]);
      return (
           <Layout>
                <UserManagement />

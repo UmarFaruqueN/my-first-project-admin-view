@@ -10,7 +10,7 @@ const CategoryHome = () => {
           if (!Token) {
                navigate("/");
           }
-     }, []);
+     }, [navigate]);
      return (
           <Layout>
                <Categories />

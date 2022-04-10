@@ -10,7 +10,7 @@ const ProductHome = () => {
           if (!Token) {
                navigate("/");
           }
-     }, []);
+     }, [navigate]);
      return (
           <Layout>
                <ProductManagement />

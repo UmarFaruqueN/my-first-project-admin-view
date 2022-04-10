@@ -9,7 +9,7 @@ const Login = () => {
           if (Token) {
                navigate("/userManagement");
           }
-     }, []);
+     }, [navigate]);
      return (
           <>
                <TopHeader />

@@ -28,7 +28,7 @@ const UserManagement = () => {
                .catch((err) => {
                     alert(err.data.message);
                });
-     }, []);
+     }, [dispatch]);
 
      const Submit = (userInfo) => {
           Swal.fire({
@@ -47,7 +47,7 @@ const UserManagement = () => {
 
                               dispatch(setUserData({ userData: response.data.userData }));
                               {
-                                   userStatus.active
+                                   userStatus?.active
                                         ? Swal.fire({
                                                position: "bottom-end",
                                                icon: "error",

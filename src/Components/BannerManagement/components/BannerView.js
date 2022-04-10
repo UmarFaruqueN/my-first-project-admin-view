@@ -129,7 +129,7 @@ const BannerView = (props) => {
 
                <Grid container mt={2} spacing={3}>
                     {banners.map((obj) => (
-                         <Grid item md={12} ml={1} sx={{ display: "flex" }}>
+                         <Grid  key={obj._id} item md={12} ml={1} sx={{ display: "flex" }}>
                               <Grid item mt={3}>
                                    <img src={obj.banner} alt="banner" width="100%" height="250"></img>
                               </Grid>

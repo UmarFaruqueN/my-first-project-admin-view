@@ -9,7 +9,7 @@ const BannerHome = () => {
           if (!Token) {
                navigate("/");
           }
-     }, []);
+     }, [navigate]);
      return (
           <Layout>
                <BannerManagement />

@@ -10,7 +10,7 @@ const OrderHome = () => {
           if (!Token) {
                navigate("/");
           }
-     }, []);
+     }, [navigate]);
      return (
           <Layout>
                <OrderManagement />

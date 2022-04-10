@@ -9,11 +9,11 @@ const ErrorPage = () => {
           setTimeout(() => {
                navigate("/");
           }, 4000);
-     }, []);
+     }, [navigate]);
      return (
           <>
                <Box>
-                    <img width={"100%"} height={"100%"} src={error} />
+                    <img width={"100%"} height={"100%"} src={error} alt="errorpage" />
                </Box>
           </>
      );

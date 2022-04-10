@@ -9,7 +9,7 @@ const AddProducts = () => {
           if (!Token) {
                navigate("/");
           }
-     }, []);
+     }, [navigate]);
      return <ProductAddForm />;
 };
 
